@@ -34,7 +34,7 @@
                         <li><a class="dropdown-item" href="#!">Paramètres</a></li>
                         <li><a class="dropdown-item" href="#!">Journal d'activité</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">Déconnexion
+                        <li><a class="dropdown-item" href="signout.php">Déconnexion
                         </a></li>
                     </ul>
                 </li>
@@ -100,11 +100,24 @@
             </div>
             <div id="layoutSidenav_content">
                 <main>
+                <li class="nav-item nav-profile">
+                            <a href="#" class="nav-link">
+                                <div class="nav-profile-image">
+                                    <img src="/assets/" <?php echo $_SESSION['image']?> alt="profile" />
+                                    <span class="login-status online"></span>
+                                </div>
+                                <div class="nav-profile-text d-flex flex-column pr-3">
+                                    <span class="font-weight-medium mb-2"><?php echo $_SESSION['e']?></span>
+                                </div>
+                            </a>
+                        </li>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Tableau de bord</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active"><b>Bonjour, bienvenue!</b>  admin@gmail.com </li>
+                            <li class="breadcrumb-item active"><b>Bonjour, bienvenue!</b>   </li>
                         </ol>
+                
+                        <div class=""></div>
                         <div class="row">
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-primary text-white mb-4">

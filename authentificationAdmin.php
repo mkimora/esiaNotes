@@ -14,7 +14,7 @@ $row=mysqli_fetch_assoc($res);
 
 if(empty($e) || empty($p))
 {
-    header('Location: index.html?erreur=2');
+    header('Location: index.php?erreur=2');
 }
 elseif( mysqli_num_rows($res)==1)
 {
@@ -22,12 +22,12 @@ elseif( mysqli_num_rows($res)==1)
     $_SESSION['p']=$p;
     $_SESSION['image']=$row['image'];
 
-    header('location:loged.html');
+    header('location:loged.php');
    
 }
 else
 {
-    header('Location:index.html?erreur=1');
+    header('Location:index.php?erreur=1');
 }
 
 ?>
