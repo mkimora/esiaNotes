@@ -1,3 +1,24 @@
+<?php
+session_start();
+if(isset($_SESSION['e']))
+{
+    include("connexion.php");
+
+    $sql = "select * from log_admin";
+    $res = mysqli_query($connect,$sql);
+
+    $sql1 = "select * from tabclasses a, tabetudiant b where a.id=b.classeId";
+    $res1 = mysqli_query($connect,$sql1);
+
+    $sql2 = "select * from tabetudiant a, tabclasses b where a.classeId=b.id";
+    $res2 = mysqli_query($connect,$sql2);
+
+    $sql3 = "select * from tabclasses";
+    $res3 = mysqli_query($connect,$sql3);
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -15,7 +36,7 @@
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="index.php">ESIA NOTES
-                <img src="esianotes.jpg" alt="" width="30" height="35">
+                <img src="esianotes.jpg" alt="" width="30" height="25">
             </a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
@@ -46,64 +67,63 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">ESIA Sénégal</div>
-                            <a class="nav-link" href="loged.html">
+                            <a class="nav-link" href="loged.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Tableau de bord
 
                             </a>
                             <div class="sb-sidenav-menu-heading"> Etudiants </div>
                             <a class="nav-link collapsed" href="etudiant.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-graduation-cap"></i></div>
                                Etudiants
                             </a>
-                          
-                            <div class="sb-sidenav-menu-heading"> Classes </div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+
+                            <div class="sb-sidenav-menu-heading">Classes</div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-school"></i></div>
                                 Classes
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="ajoutclasse.php">Ajout Classes</a>
+                                    <a class="nav-link" href="gererclasse.php">Gérer Classes</a>
+                                </nav>
+                            </div>
+                         
+                            <div class="sb-sidenav-menu-heading"> Professeurs </div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-person-chalkboard"></i></div>
+                                Professeurs
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        Ajout Classes
+                                <a class="nav-link collapsed" href="professeur.php">
+                                        Ajout Professeurs
                                     </a>
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        Gérer Classes
+                                    <a class="nav-link collapsed" href="gererprof.php">
+                                        Gérer Professeurs
                                     </a>
                                  
                     
                                 </nav>
                             </div>
+                       
                             <div class="sb-sidenav-menu-heading"> Résultats </div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            <a class="nav-link collapsed" href="resultat.php">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-square-poll-horizontal"></i></div>
                                Résultats
                             </a>
-                     
-                            <div class="sb-sidenav-menu-heading">Email</div>
-                            <a class="nav-link" href="charts.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Charts
-                            </a>
-                            <a class="nav-link" href="tables.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Tables
-                            </a>
+                           
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
-                        <div class="small">Connecté en tant que:</div>
-                        Admin
-                    </div>
-                </nav>
-            </div>
-            <div id="layoutSidenav_content">
-                <main>
-                <li class="nav-item nav-profile">
+                        <div class="small">Connecté(e) en tant que:</div>
+                        <li class="nav-item nav-profile">
                             <a href="#" class="nav-link">
                                 <div class="nav-profile-image">
-                                    <img src="/assets/" <?php echo $_SESSION['image']?> alt="profile" />
+                                    <img src="/assets/" <?php /* echo $_SESSION['image'] */?> alt="profile" />
                                     <span class="login-status online"></span>
                                 </div>
                                 <div class="nav-profile-text d-flex flex-column pr-3">
@@ -111,10 +131,16 @@
                                 </div>
                             </a>
                         </li>
+                    </div>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Tableau de bord</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active"><b>Bonjour, bienvenue!</b>   </li>
+                            <li class="breadcrumb-item active"><b><em>Bonjour, bienvenue!</em> </b>   </li>
                         </ol>
                 
                         <div class=""></div>
@@ -130,10 +156,16 @@
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-warning text-white mb-4">
+                                <?php
+                                    $query = "select id from tabclasses order by id";
+                                    $query_run=mysqli_query($connect,$query);
+                                    $row=mysqli_num_rows($query_run);
+                                    ?>
                                     <div class="card-body">Classes</div>
+                                    <h2 class="text-white"><?php echo $row?></h2>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">Voir Détails</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                        <a class="small text-white stretched-link" href="#"></a>
+                                        <div class="small text-white"><i class=""></i></div>
                                     </div>
                                 </div>
                             </div>
