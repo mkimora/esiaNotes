@@ -35,7 +35,7 @@ if(isset($_SESSION['e']))
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.php">ESIA NOTES
+            <a class="navbar-brand ps-3" href="#">ESIA NOTES
                 <img src="esianotes.jpg" alt="" width="30" height="25">
             </a>
             <!-- Sidebar Toggle-->
@@ -119,18 +119,19 @@ if(isset($_SESSION['e']))
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
-                        <div class="small">Connecté(e) en tant que:</div>
+                        <div class="small">Connecté(e) en tant que:
                         <li class="nav-item nav-profile">
-                            <a href="#" class="nav-link">
-                                <div class="nav-profile-image">
-                                    <img src="/assets/" <?php /* echo $_SESSION['image'] */?> alt="profile" />
+                            <a href="#" class="">
+                                <div class="nav-profile-image" >
+                                    <img src="" width="30" height="25"<?php /* echo $_SESSION['image'] */ ?> alt="profile" />
                                     <span class="login-status online"></span>
                                 </div>
-                                <div class="nav-profile-text d-flex flex-column pr-3">
-                                    <span class="font-weight-medium mb-2"><?php echo $_SESSION['e']?></span>
+                                <div class="nav-profile-text d-flex  pr-3">
+                                    <span class="font-weight-medium mb-2"><strong> <em><?php echo $_SESSION['e']?></em></strong></span>
                                 </div>
                             </a>
                         </li>
+                        </div>
                     </div>
                 </nav>
             </div>
@@ -146,6 +147,11 @@ if(isset($_SESSION['e']))
                         <div class=""></div>
                         <div class="row">
                             <div class="col-xl-3 col-md-6">
+                            <?php
+                                    $query = "select id from tabetudiant order by id";
+                                    $query_run=mysqli_query($connect,$query);
+                                    $row=mysqli_num_rows($query_run);
+                                    ?>
                                 <div class="card bg-primary text-white mb-4">
                                     <div class="card-body">Étudiants</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">

@@ -1,3 +1,13 @@
+<?php
+session_start();
+if(isset($_SESSION['e'])){
+    include("connexion.php");
+
+    $sql="select * from tabclasses";
+    $res=mysqli_query($connect,$sql);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -6,7 +16,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Tableau de bord - Admin</title>
+        <title>Gérer - Classe</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -98,23 +108,86 @@
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
-                        <div class="small">Connecté(e) en tant que:</div>
+                        <div class="small">Connecté(e) en tant que:
                         <li class="nav-item nav-profile">
-                            <a href="#" class="nav-link">
-                                <div class="nav-profile-image">
-                                    <img src="/assets/" <?php echo $_SESSION['image']?> alt="profile" />
+                            <a href="#" class="">
+                                <div class="nav-profile-image" >
+                                    <img src="../image/" width="30" height="25"<?php /* echo $_SESSION['image'] */ ?> alt="profile" />
                                     <span class="login-status online"></span>
                                 </div>
-                                <div class="nav-profile-text d-flex flex-column pr-3">
-                                    <span class="font-weight-medium mb-2"><?php echo $_SESSION['e']?></span>
+                                <div class="nav-profile-text d-flex  pr-3">
+                                    <span class="font-weight-medium mb-2"><strong> <em><?php echo $_SESSION['e']?></em></strong></span>
                                 </div>
                             </a>
                         </li>
+                        </div>
                     </div>
                 </nav>
             </div>
             <div id="layoutSidenav_content">
                 <main>
+                    <div class="col-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Gérer les classes</h4>
+                                <p class="card-description" style="color:blue;">Modifier/Supprimer une classe</p>
+
+                                <form class="nav-link form-inline mt-2 mt-md-0" method="post" action="recherche.php">
+                                    <div class="input-group">
+                                        <input name="recherche" type="text" class="form-control" placeholder="Rechercher...">
+                                        <input type="submit" value="Search" class="btn btn-outline-primary">
+                                    </div>
+                                </form>
+                                <?php
+                                if(isset($_GET['succes'])){
+                                    $err = $_GET['succes'];
+                                    if($err == 1)
+                                    echo "<div class='alert alert-danger my-3'>Classe supprimée avec succès</div>";
+                                    if($err == 2)
+                                    echo "<div class='alert alert-success my-3'>Classe modifiée avec succès</div>";
+                                }
+                                ?>
+
+                                <div class="table-responsive">
+                                    <table bgcolor="DE B8 87" class="table table" >
+                                        <thead>
+                                            <tr bgcolor="FF F8 DC">
+                                                <th scope="col">#</th>
+                                                <th scope="col">Nom de la classe</th>
+                                                <th scope="col">Section</th>
+                                                <th scope="col">Niveau</th>
+                                                <th scope="col">Grade</th>
+                                                <th scope="col">Actions</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            $i=1;
+                                            while($row=mysqli_fetch_assoc($res)){
+                                            ?>
+                                            <tr>
+                                                <th scope="row"><?php echo $i ?></th>
+                                                <td><?php echo $row["className"] ?></td>
+                                                <td><?php echo $row["section"] ?></td>
+                                                <td><?php echo $row["niveau"] ?></td>
+                                                <td><?php echo $row["grade"] ?></td>
+                                               
+                                                <td>
+                                                    <a href="manageclassesedit1.php?id=<?php echo $row['id']?>"><i class="fas fa-edit" style="color:yellow"></i></a>
+                                                    <a href="manageclassesSupp.php?id=<?php echo $row['id']?>"><i class="fa fa-trash" style="color:red"></i></a>
+                                                </td>
+                                            </tr>
+                                            <?php
+                                            $i++; 
+                                        }
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 
                 </main>

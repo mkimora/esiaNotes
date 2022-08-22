@@ -6,4 +6,5 @@ $dbname = "esiaNotes";
 
 $connect = new mysqli($servername,$username,$password,$dbname);
 
+
 ?>

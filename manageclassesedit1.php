@@ -1,3 +1,20 @@
+<?php
+session_start();
+if (isset($_SESSION['e'])) {
+    include("connexion.php");
+
+    $id = $_GET['id'];
+
+    $sql = "select * from log_admin";
+    $res = mysqli_query($connect, $sql);
+
+    $id = $_GET['id'];
+    $sql1 = "select * from tabclasses where id='$id'";
+    $res1 = mysqli_query($connect, $sql1);
+    $row1 = mysqli_fetch_assoc($res1);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +24,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Tableau de bord - Admin</title>
+    <title>Modification - Classe</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -102,20 +119,20 @@
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
-                        <div class="small">Connecté(e) en tant que:
+                    <div class="small">Connecté(e) en tant que:
                         <li class="nav-item nav-profile">
                             <a href="#" class="">
-                                <div class="nav-profile-image" >
-                                    <img src="../image/" width="30" height="25"<?php /* echo $_SESSION['image'] */ ?> alt="profile" />
+                                <div class="nav-profile-image">
+                                    <img src="../image/" width="30" height="25" <?php /* echo $_SESSION['image'] */ ?> alt="profile" />
                                     <span class="login-status online"></span>
                                 </div>
                                 <div class="nav-profile-text d-flex  pr-3">
-                                    <span class="font-weight-medium mb-2"><strong> <em><?php echo $_SESSION['e']?></em></strong></span>
+                                    <span class="font-weight-medium mb-2"><strong> <em><?php echo $_SESSION['e'] ?></em></strong></span>
                                 </div>
                             </a>
                         </li>
-                        </div>
                     </div>
+                </div>
             </nav>
         </div>
         <div id="layoutSidenav_content">
@@ -125,48 +142,32 @@
                         <div class="col-lg-7">
                             <div class="card shadow-lg border-0 rounded-lg mt-5">
                                 <div class="card-header">
-                                    <h3 class="text-center font-weight-light my-4">Ajouter une classe</h3>
+                                    <h3 class="text-center font-weight-light my-4">Modifier une classe</h3>
                                 </div>
                                 <div class="card-body">
-                                    <p><em style="color:red;"> * champ obligatoire</em></p>
-                                    <form class="forms-sample" action="addclasseX.php" method="post">
-                                        <?php
-                                        if (isset($_GET['succes'])) {
-                                            $err = $_GET['succes'];
-                                            if ($err == 1 || $err == 2)
-                                                echo "<div class='alert alert-success my-3'>Classe ajoutée avec succès</div>";
-                                        }
-                                        ?>
-
-                                        <?php
-                                        if (isset($_GET['erreur'])) {
-                                            $err = $_GET['erreur'];
-                                            if ($err == 1)
-                                                echo "<div class='alert alert-danger my-3'>Classe existante</div>";
-                                            if ($err == 2)
-                                                echo "<div class='alert alert-danger my-3'>Champ vide!!</div>";
-                                        }
-                                        ?>
+                                    <p><em style="color:red;"></em></p>
+                                    <form class="forms-sample" action="manageclassesEdit2.php" method="post">
+                                        <input type="hidden" value="<?php echo $row1['id']?>" class="form-control" id="section" name="id" id="inputAddress">
 
                                         <div class="form-floating mb-3">
                                             <div class="col-md-6">
-                                                <label for="inputFirstName">* Classe</label>
-                                                <input name="nom" class="form-control" id="inputFirstName" type="text" placeholder="Entrer nom classe" />
+                                                <label for="exampleInputName1">Classe</label>
+                                                <input name="nom" value="<?php echo $row1['className']?>" class="form-control" id="exampleInput" type="text" placeholder="Entrer nom classe" />
                                             </div>
 
                                         </div>
-                                        <label for="inputEmail">* Section</label>
+                                        <label for="inputEmail">Section</label>
                                         <div class="form-floating mb-3">
                                             <select name="section" id="inputSection">
                                                 <option selected>Sélectionner section</option>
                                                 <option>Génie Informatique</option>
                                                 <option>Comptabilité</option>
-                                                <option>Génie mécanique</option>
+                                                <option>Génie Mécanique</option>
                                                 <option>Génie Electrique</option>
                                                 <option>Génie Civile</option>
                                             </select>
                                         </div>
-                                        <label for="inputEmail">* Niveau</label>
+                                        <label for="inputEmail">Niveau</label>
                                         <div class="form-floating mb-3">
                                             <select name="niveau" id="monselect">
                                                 <option selected>Sélectionner niveau</option>
@@ -202,7 +203,7 @@
                     </div>
                 </div>
 
-            </main><br>
+            </main>
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">

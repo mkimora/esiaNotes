@@ -9,7 +9,7 @@ $n=$_POST['niveau'];
 
 $x=$_POST['grade'];
 
-$connect->query("INSERT INTO tabclasses(className,section,niveau,grade) VALUES('$m','$s','$n','$x')") or die($connect->error);
+$sql="INSERT INTO tabclasses(className,section,niveau,grade) VALUES('$m','$s','$n','$x')";
 
 $sql1="select className from tabclasses where className='$m'";
 $res=mysqli_query($connect,$sql1);

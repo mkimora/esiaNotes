@@ -98,18 +98,19 @@
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
-                        <div class="small">Connecté(e) en tant que:</div>
+                        <div class="small">Connecté(e) en tant que:
                         <li class="nav-item nav-profile">
-                            <a href="#" class="nav-link">
-                                <div class="nav-profile-image">
-                                    <img src="/assets/" <?php echo $_SESSION['image']?> alt="profile" />
+                            <a href="#" class="">
+                                <div class="nav-profile-image" >
+                                    <img src="../image/" width="30" height="25"<?php /* echo $_SESSION['image'] */ ?> alt="profile" />
                                     <span class="login-status online"></span>
                                 </div>
-                                <div class="nav-profile-text d-flex flex-column pr-3">
-                                    <span class="font-weight-medium mb-2"><?php echo $_SESSION['e']?></span>
+                                <div class="nav-profile-text d-flex  pr-3">
+                                    <span class="font-weight-medium mb-2"><strong> <em><?php echo $_SESSION['e']?></em></strong></span>
                                 </div>
                             </a>
                         </li>
+                        </div>
                     </div>
                 </nav>
             </div>
