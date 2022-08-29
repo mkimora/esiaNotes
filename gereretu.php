@@ -8,8 +8,6 @@ if (isset($_SESSION['e'])) {
 }
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +18,7 @@ if (isset($_SESSION['e'])) {
     <meta name="description" content="" />
     <meta name="author" content="" />
     <link rel="icon" type="image/png" href="esianotes.jpg">
-    <title>ESIA NOTES</title>
+    <title>ESIA - NOTES</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -29,7 +27,7 @@ if (isset($_SESSION['e'])) {
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="index.php">ESIA NOTES
+        <a class="navbar-brand ps-3" href="#">ESIA NOTES
             <img src="esianotes.jpg" alt="" width="30" height="35">
         </a>
         <!-- Sidebar Toggle-->
@@ -81,6 +79,7 @@ if (isset($_SESSION['e'])) {
                                 <a class="nav-link" href="gereretu.php">Gérer Etudiants</a>
                             </nav>
                         </div>
+
                         <div class="sb-sidenav-menu-heading">Classes</div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
@@ -108,6 +107,8 @@ if (isset($_SESSION['e'])) {
                                 <a class="nav-link collapsed" href="gererprof.php">
                                     Gérer Professeurs
                                 </a>
+
+
                             </nav>
                         </div>
                         <div class="sb-sidenav-menu-heading"> Résultats </div>
@@ -136,95 +137,79 @@ if (isset($_SESSION['e'])) {
             </nav>
         </div>
         <div id="layoutSidenav_content">
-            <center>
             <main>
-            <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-7">
-                            <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                <div class="card-header">
-                                    <h3 class="text-center font-weight-light my-4">Ajouter un étudiant</h3>
+                <div class="col-12 grid-margin stretch-card"><br>
+                    <center>
+                        <h3 class="card-title"><strong><em style="color:rgb(160 82 45);">Étudiants</em></strong></h3><br>
+                    </center>
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title" style="color:rgb(222 184 135);">Gérer les étudiants</h4>
+                            <p class="card-description"><strong><em>Modifier/Supprimer un étudiant</em></strong> </p>
+
+                            <form class="nav-link form-inline mt-2 mt-md-0" method="post" action="recherche.php">
+                                <div class="input-group">
+                                    <input name="recherche" type="text" class="form-control" placeholder="Rechercher...">
+                                    <input type="submit" value="Rechercher"  class="btn btn-outline-primary">
                                 </div>
-                                <div class="card-body">
-                                    <p><em style="color:red;"> * champ obligatoire</em></p>
-                                    <form class="forms-sample" action="addclasseX.php" method="post">
+                            </form>
+                            <?php
+                            if (isset($_GET['succes'])) {
+                                $err = $_GET['succes'];
+                                if ($err == 1)
+                                    echo "<div class='alert alert-danger my-3'>Étudiant supprimée avec succès</div>";
+                                if ($err == 2)
+                                    echo "<div class='alert alert-success my-3'>Étudiant modifiée avec succès</div>";
+                            }
+                            ?>
+
+                            <div class="table-responsive">
+                                <table bgcolor="DE B8 87" class="table table">
+                                    <thead>
+                                        <tr bgcolor="FF F8 DC">
+                                            <th scope="col">#</th>
+                                            <th scope="col">Prénom et Nom</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Matricule</th>
+                                            <th scope="col">Sexe</th>
+                                            <th scope="col">Niveau</th>
+                                            <th scope="col">Grade</th>
+                                            <th scope="col">Actions</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
                                         <?php
-                                        if (isset($_GET['succes'])) {
-                                            $err = $_GET['succes'];
-                                            if ($err == 1 || $err == 2)
-                                                echo "<div class='alert alert-success my-3'>Classe ajoutée avec succès</div>";
+                                        $i = 1;
+                                        while ($row = mysqli_fetch_assoc($res)) {
+                                        ?>
+                                            <tr>
+                                                <th scope="row"><?php echo $i ?></th>
+                                                <td><?php echo $row["nomEtudiant"] ?></td>
+                                                <td><?php echo $row["email"] ?></td>
+                                                <td><?php echo $row["matricule"] ?></td>
+                                                <td><?php echo $row["sexe"] ?></td>
+                                                <td><?php echo $row["classe"] ?></td>
+                                                <td><?php echo $row["grade"] ?></td>
+
+                                                <td>
+                                                    <a href="manageetudiantedit1.php?id=<?php echo $row['id'] ?>"><i class="fas fa-edit" style="color:yellow"></i></a>
+                                                    <a href="manageetudiantSupp.php?id=<?php echo $row['id'] ?>"><i class="fa fa-trash" style="color:red"></i></a>
+                                                </td>
+                                            </tr>
+                                        <?php
+                                            $i++;
                                         }
                                         ?>
-
-                                        <?php
-                                        if (isset($_GET['erreur'])) {
-                                            $err = $_GET['erreur'];
-                                            if ($err == 1)
-                                                echo "<div class='alert alert-danger my-3'>Classe existante</div>";
-                                            if ($err == 2)
-                                                echo "<div class='alert alert-danger my-3'>Champ vide!!</div>";
-                                        }
-                                        ?>
-
-                                        <div class="form-floating mb-3">
-                                            <div class="col-md-6">
-                                                <label for="inputFirstName">* Prénom et Nom</label>
-                                                <input name="nom" class="form-control" id="inputFirstName" type="text" placeholder="Entrer prénom et nom" required />
-                                            </div>
-
-                                        </div>
-
-                                        <div class="form-floating mb-3">
-                                            <div class="col-md-6">
-                                                <label for="inputFirstName">* Email</label>
-                                                <input name="email" class="form-control" id="inputEmail" type="email" placeholder="Entrer email"require />
-                                            </div>
-
-                                        </div>
-
-                                        <div class="form-floating mb-3">
-                                            <div class="col-md-6">
-                                                <label for="inputFirstName">* Matricule</label>
-                                                <input name="mat" class="form-control" id="inputMatricule" type="text" placeholder="Entrer matricule" required />
-                                            </div>
-
-                                        </div>
-                                        <label for="inputEmail">* Genre</label>
-                                        <div class="form-floating mb-3">
-                                            <select name="genre" id="inputSection">
-                                                <option selected disabled="disabled">Sélectionner genre</option>
-                                                <option>Masculin</option>
-                                                <option>Féminin</option>
-                                            </select>
-                                        </div>
-                                        <label for="inputEmail">* Classe</label>
-                                        <div class="form-floating mb-3">
-                                            <select name="niveau" id="monselect">
-                                            <option selected disabled="disabled">Sélectionner classe</option>
-                                                <option>Génie Informatique</option>
-                                                <option>Comptabilité</option>
-                                                <option>Génie mécanique</option>
-                                                <option>Génie Electrique</option>
-                                                <option>Génie Civile</option>
-                                            </select>
-                                        </div>
-                                  
-                                        <div class="mt-4 mb-0">
-                                            <center>
-                                                <input type="submit"  value="Ajouter" class="btn btn-primary mr-2"></a>
-                                                <button type="reset"  value="Annuler" class="btn btn-primary">Annuler</a>
-                                            </center>
-                                        </div>
-
-                                    </form>
-                                </div>
-
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
             </main>
-            </center>
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">

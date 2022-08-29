@@ -27,7 +27,7 @@ if (isset($_SESSION['e'])) {
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="index.php">ESIA NOTES
+        <a class="navbar-brand ps-3" href="#">ESIA NOTES
             <img src="esianotes.jpg" alt="" width="30" height="35">
         </a>
         <!-- Sidebar Toggle-->
@@ -68,7 +68,7 @@ if (isset($_SESSION['e'])) {
                         </a>
                         <div class="sb-sidenav-menu-heading"> Etudiants </div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                        <div class="sb-nav-link-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-graduation-cap"></i></div>
                             Etudiants
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 
@@ -133,29 +133,28 @@ if (isset($_SESSION['e'])) {
                 </div>
             </nav>
         </div>
-        <input type="button" class="btn btn-primary" value="Retour" onclick="history.back()">
 
         <div id="layoutSidenav_content">
-            
+
             <main>
 
-            <div class="container">
+                <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-lg-7">
                             <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                
+
                                 <div class="card-header">
 
                                     <h3 class="text-center font-weight-light my-4">Ajouter un étudiant</h3>
                                 </div>
                                 <div class="card-body">
                                     <p><em style="color:red;"> * champ obligatoire</em></p>
-                                    <form class="forms-sample" action="addclasseX.php" method="post">
+                                    <form class="forms-sample" action="addetudiantX.php" method="post">
                                         <?php
                                         if (isset($_GET['succes'])) {
                                             $err = $_GET['succes'];
                                             if ($err == 1 || $err == 2)
-                                                echo "<div class='alert alert-success my-3'>Classe ajoutée avec succès</div>";
+                                                echo "<div class='alert alert-success my-3'>Étudiant ajouté avec succès</div>";
                                         }
                                         ?>
 
@@ -163,7 +162,7 @@ if (isset($_SESSION['e'])) {
                                         if (isset($_GET['erreur'])) {
                                             $err = $_GET['erreur'];
                                             if ($err == 1)
-                                                echo "<div class='alert alert-danger my-3'>Classe existante</div>";
+                                                echo "<div class='alert alert-danger my-3'>Cet étudiant existe déjà</div>";
                                             if ($err == 2)
                                                 echo "<div class='alert alert-danger my-3'>Champ vide!!</div>";
                                         }
@@ -188,7 +187,7 @@ if (isset($_SESSION['e'])) {
                                         <div class="form-floating mb-3">
                                             <div class="col-md-6">
                                                 <label for="inputFirstName">* Matricule</label>
-                                                <input name="mat" class="form-control" id="inputMatricule" type="text" placeholder="Entrer matricule" required/>
+                                                <input name="mat" class="form-control" id="inputMatricule" type="text" placeholder="Entrer matricule" required />
                                             </div>
 
                                         </div>
@@ -200,22 +199,33 @@ if (isset($_SESSION['e'])) {
                                                 <option>Féminin</option>
                                             </select>
                                         </div>
-                                        <label for="inputEmail">* Classe</label>
+                                        <label for="inputEmail">* Section</label>
                                         <div class="form-floating mb-3">
                                             <select name="niveau" id="monselect">
-                                            <option selected disabled="disabled">Sélectionner classe</option>
+                                                <option selected disabled="disabled">Sélectionner classe</option>
                                                 <option>Génie Informatique</option>
-                                                <option>Comptabilité</option>
-                                                <option>Génie mécanique</option>
+                                                <option>Comptabilité-Gestion</option>
+                                                <option>Transit-Logistique</option>
                                                 <option>Génie Electrique</option>
                                                 <option>Génie Civile</option>
                                             </select>
                                         </div>
-                                  
+                                        <label for="inputEmail">* Grade</label>
+                                        <div class="form-floating mb-3">
+                                            <select name="grade" id="monselect" required>
+                                                <option selected disabled="disabled">Sélectionner grade</option>
+                                                <option>1ère année</option>
+                                                <option>2ème année</option>
+                                                <option>3ème année</option>
+                                                <option>4ème année</option>
+                                                <option>5ème année</option>
+                                            </select>
+                                        </div>
+
                                         <div class="mt-4 mb-0">
                                             <center>
-                                                <input type="submit"  value="Ajouter" class="btn btn-primary mr-2"></a>
-                                                <button type="reset"  value="Annuler" class="btn btn-primary">Annuler</a>
+                                                <input type="submit" value="Ajouter" class="btn btn-primary mr-2"></a>
+                                                <input type="reset" value="Annuler" class="btn btn-primary mr-2"></a>
                                             </center>
                                         </div>
 
@@ -225,7 +235,6 @@ if (isset($_SESSION['e'])) {
                             </div>
                         </div>
                     </div>
-                    <input type="button" class="btn btn-primary" value="Retour" onclick="history.back()">
 
                 </div>
             </main>

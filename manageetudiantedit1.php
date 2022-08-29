@@ -3,8 +3,15 @@ session_start();
 if (isset($_SESSION['e'])) {
     include("connexion.php");
 
-    $sql = "select * from tabclasses";
+    $id = $_GET['id'];
+
+    $sql = "select * from log_admin";
     $res = mysqli_query($connect, $sql);
+
+    $id = $_GET['id'];
+    $sql1 = "select * from tabetudiant where id='$id'";
+    $res1 = mysqli_query($connect, $sql1);
+    $row1 = mysqli_fetch_assoc($res1);
 }
 ?>
 
@@ -68,7 +75,7 @@ if (isset($_SESSION['e'])) {
                         </a>
                         <div class="sb-sidenav-menu-heading"> Etudiants </div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-graduation-cap"></i></div>
                             Etudiants
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 
@@ -137,73 +144,66 @@ if (isset($_SESSION['e'])) {
             </nav>
         </div>
         <div id="layoutSidenav_content">
-            <main><br>
+            <main>
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-lg-7">
                             <div class="card shadow-lg border-0 rounded-lg mt-5">
                                 <div class="card-header">
-                                    <h3 class="text-center font-weight-light my-4">Ajouter une classe</h3>
+                                    <h3 class="text-center font-weight-light my-4">Modifier étudiant</h3>
                                 </div>
                                 <div class="card-body">
-                                    <p><em style="color:red;"> * champ obligatoire</em></p>
-                                    <form class="forms-sample" action="addclasseX.php" method="post">
-                                        <?php
-                                        if (isset($_GET['succes'])) {
-                                            $err = $_GET['succes'];
-                                            if ($err == 1 || $err == 2)
-                                                echo "<div class='alert alert-success my-3'>Classe ajoutée avec succès</div>";
-                                        }
-                                        ?>
+                                    <p><em style="color:red;"></em></p>
+                                    <form class="forms-sample" action="manageclassesEdit2.php" method="post">
+                                        <input type="hidden" value="<?php echo $row1['id']?>" class="form-control" id="section" name="id" id="inputAddress">
 
-                                        <?php
-                                        if (isset($_GET['erreur'])) {
-                                            $err = $_GET['erreur'];
-                                            if ($err == 1)
-                                                echo "<div class='alert alert-danger my-3'>Classe existante</div>";
-                                            if ($err == 2)
-                                                echo "<div class='alert alert-danger my-3'>Champ vide!!</div>";
-                                        }
-                                        ?>
-
+                 
                                         <div class="form-floating mb-3">
                                             <div class="col-md-6">
-                                                <label for="inputFirstName">* Classe</label>
-                                                <input name="nom" class="form-control" id="inputFirstName" type="text" placeholder="Entrer nom classe" required>
+                                                <label for="inputFirstName">* Prénom et Nom</label>
+                                                <input name="nom" value="<?php echo $row1['nomEtudiant']?>" class="form-control" id="inputFirstName" type="text" placeholder="Entrer prénom et nom" required />
                                             </div>
 
                                         </div>
 
                                         <div class="form-floating mb-3">
                                             <div class="col-md-6">
-                                                <label for="inputEmail">* Section</label>
-                                                <div class="form-floating mb-3">
-                                                    <select name="section" id="inputSection" required>
-                                                        <option selected disabled="disabled">Sélectionner section</option>
-                                                        <option>Génie Informatique</option>
-                                                        <option>Comptabilité-Gestion</option>
-                                                        <option>Transit-Logistique</option>
-                                                        <option>Génie Electrique</option>
-                                                        <option>Génie Civile</option>
-                                                    </select>
-                                                </div>
+                                                <label for="inputFirstName">* Email</label>
+                                                <input name="email" value="<?php echo $row1['email']?>" class="form-control" id="inputEmail" type="email" placeholder="Entrer email" required />
                                             </div>
+
                                         </div>
 
-                                        <label for="inputEmail">* Niveau</label>
                                         <div class="form-floating mb-3">
-                                            <select name="niveau" id="monselect" required>
-                                                <option selected disabled="disabled">Sélectionner niveau</option>
-                                                <option>BTS</option>
-                                                <option>Licence</option>
-                                                <option>Master</option>
-                                                <option>Ingénierie</option>
+                                            <div class="col-md-6">
+                                                <label for="inputFirstName">* Matricule</label>
+                                                <input name="mat" value="<?php echo $row1['matricule']?>" class="form-control" id="inputMatricule" type="text" placeholder="Entrer matricule" required />
+                                            </div>
+
+                                        </div>
+                                        <label for="inputEmail">* Genre</label>
+                                        <div class="form-floating mb-3">
+                                            <select name="genre" id="inputSection">
+                                                <option value="<?php echo $row1['sexe']?>" disabled="disabled">Sélectionner genre</option>
+                                                <option>Masculin</option>
+                                                <option>Féminin</option>
+                                            </select>
+                                        </div>
+                                        <label for="inputEmail">* Section</label>
+                                        <div class="form-floating mb-3">
+                                            <select name="niveau" id="monselect">
+                                                <option value="<?php echo $row1['classe']?>" disabled="disabled">Sélectionner classe</option>
+                                                <option>Génie Informatique</option>
+                                                <option>Comptabilité-Gestion</option>
+                                                <option>Transit-Logistique</option>
+                                                <option>Génie Electrique</option>
+                                                <option>Génie Civile</option>
                                             </select>
                                         </div>
                                         <label for="inputEmail">* Grade</label>
                                         <div class="form-floating mb-3">
                                             <select name="grade" id="monselect" required>
-                                                <option selected disabled="disabled">Sélectionner grade</option>
+                                                <option value="<?php echo $row1['grade']?>" disabled="disabled">Sélectionner grade</option>
                                                 <option>1ère année</option>
                                                 <option>2ème année</option>
                                                 <option>3ème année</option>
@@ -211,10 +211,12 @@ if (isset($_SESSION['e'])) {
                                                 <option>5ème année</option>
                                             </select>
                                         </div>
+
                                         <div class="mt-4 mb-0">
                                             <center>
-                                                <input type="submit" value="Ajouter" class="btn btn-primary mr-2"></a>
-                                                <input type="reset" value="Annuler" class="btn btn-primary mr-2"></a>
+                                                <input type="submit"   class="btn btn-primary mr-2"></a>
+                                                <input type="button" class="btn btn-primary" value="Annuler" onclick="history.back()">
+
                                             </center>
                                         </div>
 
@@ -224,9 +226,9 @@ if (isset($_SESSION['e'])) {
                             </div>
                         </div>
                     </div>
-
                 </div>
-            </main><br>
+
+            </main>
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">

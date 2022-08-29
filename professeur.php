@@ -25,7 +25,7 @@ if (isset($_SESSION['e'])) {
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.php">ESIA NOTES
+            <a class="navbar-brand ps-3" href="#">ESIA NOTES
                 <img src="esianotes.jpg" alt="" width="30" height="35">
             </a>
             <!-- Sidebar Toggle-->
