@@ -27,7 +27,8 @@ if(isset($_SESSION['e']))
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Tableau de bord - Admin</title>
+        <link rel="icon" type="image/png" href="esianotes.jpg">
+        <title>ESIA NOTES</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -73,10 +74,18 @@ if(isset($_SESSION['e']))
 
                             </a>
                             <div class="sb-sidenav-menu-heading"> Etudiants </div>
-                            <a class="nav-link collapsed" href="etudiant.php">
-                                <div class="sb-nav-link-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-                               Etudiants
-                            </a>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                            Etudiants
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+
+                        </a>
+                        <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="etudiant.php">Ajout Etudiants</a>
+                                <a class="nav-link" href="gereretu.php">Gérer Etudiants</a>
+                            </nav>
+                        </div>
 
                             <div class="sb-sidenav-menu-heading">Classes</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">

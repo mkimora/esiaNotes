@@ -1,3 +1,12 @@
+<?php
+session_start();
+if (isset($_SESSION['e'])) {
+    include("connexion.php");
+
+    $sql = "select * from log_admin";
+    $res = mysqli_query($connect, $sql);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +16,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Login - ESIA NOTES</title>
+    <link rel="icon" type="image/png" href="esianotes.jpg">
+    <title>ESIA NOTES</title>
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 </head>

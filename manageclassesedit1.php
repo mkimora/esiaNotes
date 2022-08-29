@@ -24,7 +24,8 @@ if (isset($_SESSION['e'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Modification - Classe</title>
+    <link rel="icon" type="image/png" href="esianotes.jpg">
+    <title>ESIA NOTES</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -73,11 +74,18 @@ if (isset($_SESSION['e'])) {
 
                         </a>
                         <div class="sb-sidenav-menu-heading"> Etudiants </div>
-                        <a class="nav-link collapsed" href="etudiant.php">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-graduation-cap"></i></div>
                             Etudiants
-                        </a>
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 
+                        </a>
+                        <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="etudiant.php">Ajout Etudiants</a>
+                                <a class="nav-link" href="gereretu.php">Gérer Etudiants</a>
+                            </nav>
+                        </div>
 
                         <div class="sb-sidenav-menu-heading">Classes</div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
@@ -159,10 +167,10 @@ if (isset($_SESSION['e'])) {
                                         <label for="inputEmail">Section</label>
                                         <div class="form-floating mb-3">
                                             <select name="section" id="inputSection">
-                                                <option selected>Sélectionner section</option>
+                                                <option value="<?php echo $row1['section']?>" disabled="disabled">Sélectionner section</option>
                                                 <option>Génie Informatique</option>
-                                                <option>Comptabilité</option>
-                                                <option>Génie Mécanique</option>
+                                                <option>Comptabilité-Gestion</option>
+                                                <option>Transit-Logistique</option>
                                                 <option>Génie Electrique</option>
                                                 <option>Génie Civile</option>
                                             </select>
@@ -170,7 +178,7 @@ if (isset($_SESSION['e'])) {
                                         <label for="inputEmail">Niveau</label>
                                         <div class="form-floating mb-3">
                                             <select name="niveau" id="monselect">
-                                                <option selected>Sélectionner niveau</option>
+                                                <option value="<?php echo $row1['niveau']?>" disabled="disabled">Sélectionner niveau</option>
                                                 <option>BTS</option>
                                                 <option>Licence</option>
                                                 <option>Master</option>
@@ -180,7 +188,7 @@ if (isset($_SESSION['e'])) {
                                         <label for="inputEmail">* Grade</label>
                                         <div class="form-floating mb-3">
                                             <select name="grade" id="monselect">
-                                                <option selected>Sélectionner grade</option>
+                                                <option value="<?php echo $row1['grade']?>" disabled="disabled">Sélectionner grade</option>
                                                 <option>1ère année</option>
                                                 <option>2ème année</option>
                                                 <option>3ème année</option>
@@ -190,8 +198,9 @@ if (isset($_SESSION['e'])) {
                                         </div>
                                         <div class="mt-4 mb-0">
                                             <center>
-                                                <input type="submit" class="btn btn-primary mr-2"></a>
-                                                <button class="btn btn-primary">Annuler</a>
+                                                <input type="submit"   class="btn btn-primary mr-2"></a>
+                                                <input type="button" class="btn btn-primary" value="Annuler" onclick="history.back()">
+
                                             </center>
                                         </div>
 

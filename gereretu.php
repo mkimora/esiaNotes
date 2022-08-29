@@ -3,10 +3,12 @@ session_start();
 if (isset($_SESSION['e'])) {
     include("connexion.php");
 
-    $sql = "select * from tabclasses";
+    $sql = "select * from tabetudiant";
     $res = mysqli_query($connect, $sql);
 }
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -68,7 +70,7 @@ if (isset($_SESSION['e'])) {
                         </a>
                         <div class="sb-sidenav-menu-heading"> Etudiants </div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-graduation-cap"></i></div>
                             Etudiants
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 
@@ -79,7 +81,6 @@ if (isset($_SESSION['e'])) {
                                 <a class="nav-link" href="gereretu.php">Gérer Etudiants</a>
                             </nav>
                         </div>
-
                         <div class="sb-sidenav-menu-heading">Classes</div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
@@ -107,8 +108,6 @@ if (isset($_SESSION['e'])) {
                                 <a class="nav-link collapsed" href="gererprof.php">
                                     Gérer Professeurs
                                 </a>
-
-
                             </nav>
                         </div>
                         <div class="sb-sidenav-menu-heading"> Résultats </div>
@@ -137,13 +136,14 @@ if (isset($_SESSION['e'])) {
             </nav>
         </div>
         <div id="layoutSidenav_content">
-            <main><br>
-                <div class="container">
+            <center>
+            <main>
+            <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-lg-7">
                             <div class="card shadow-lg border-0 rounded-lg mt-5">
                                 <div class="card-header">
-                                    <h3 class="text-center font-weight-light my-4">Ajouter une classe</h3>
+                                    <h3 class="text-center font-weight-light my-4">Ajouter un étudiant</h3>
                                 </div>
                                 <div class="card-body">
                                     <p><em style="color:red;"> * champ obligatoire</em></p>
@@ -168,53 +168,51 @@ if (isset($_SESSION['e'])) {
 
                                         <div class="form-floating mb-3">
                                             <div class="col-md-6">
-                                                <label for="inputFirstName">* Classe</label>
-                                                <input name="nom" class="form-control" id="inputFirstName" type="text" placeholder="Entrer nom classe" required>
+                                                <label for="inputFirstName">* Prénom et Nom</label>
+                                                <input name="nom" class="form-control" id="inputFirstName" type="text" placeholder="Entrer prénom et nom" required />
                                             </div>
 
                                         </div>
 
                                         <div class="form-floating mb-3">
                                             <div class="col-md-6">
-                                                <label for="inputEmail">* Section</label>
-                                                <div class="form-floating mb-3">
-                                                    <select name="section" id="inputSection" required>
-                                                        <option selected disabled="disabled">Sélectionner section</option>
-                                                        <option>Génie Informatique</option>
-                                                        <option>Comptabilité-Gestion</option>
-                                                        <option>Transit-Logistique</option>
-                                                        <option>Génie Electrique</option>
-                                                        <option>Génie Civile</option>
-                                                    </select>
-                                                </div>
+                                                <label for="inputFirstName">* Email</label>
+                                                <input name="email" class="form-control" id="inputEmail" type="email" placeholder="Entrer email"require />
                                             </div>
+
                                         </div>
 
-                                        <label for="inputEmail">* Niveau</label>
                                         <div class="form-floating mb-3">
-                                            <select name="niveau" id="monselect" required>
-                                                <option selected disabled="disabled">Sélectionner niveau</option>
-                                                <option>BTS</option>
-                                                <option>Licence</option>
-                                                <option>Master</option>
-                                                <option>Ingénierie</option>
+                                            <div class="col-md-6">
+                                                <label for="inputFirstName">* Matricule</label>
+                                                <input name="mat" class="form-control" id="inputMatricule" type="text" placeholder="Entrer matricule" required />
+                                            </div>
+
+                                        </div>
+                                        <label for="inputEmail">* Genre</label>
+                                        <div class="form-floating mb-3">
+                                            <select name="genre" id="inputSection">
+                                                <option selected disabled="disabled">Sélectionner genre</option>
+                                                <option>Masculin</option>
+                                                <option>Féminin</option>
                                             </select>
                                         </div>
-                                        <label for="inputEmail">* Grade</label>
+                                        <label for="inputEmail">* Classe</label>
                                         <div class="form-floating mb-3">
-                                            <select name="grade" id="monselect" required>
-                                                <option selected disabled="disabled">Sélectionner grade</option>
-                                                <option>1ère année</option>
-                                                <option>2ème année</option>
-                                                <option>3ème année</option>
-                                                <option>4ème année</option>
-                                                <option>5ème année</option>
+                                            <select name="niveau" id="monselect">
+                                            <option selected disabled="disabled">Sélectionner classe</option>
+                                                <option>Génie Informatique</option>
+                                                <option>Comptabilité</option>
+                                                <option>Génie mécanique</option>
+                                                <option>Génie Electrique</option>
+                                                <option>Génie Civile</option>
                                             </select>
                                         </div>
+                                  
                                         <div class="mt-4 mb-0">
                                             <center>
-                                                <input type="submit" value="Ajouter" class="btn btn-primary mr-2"></a>
-                                                <input type="reset" value="Annuler" class="btn btn-primary mr-2"></a>
+                                                <input type="submit"  value="Ajouter" class="btn btn-primary mr-2"></a>
+                                                <button type="reset"  value="Annuler" class="btn btn-primary">Annuler</a>
                                             </center>
                                         </div>
 
@@ -224,9 +222,9 @@ if (isset($_SESSION['e'])) {
                             </div>
                         </div>
                     </div>
-
                 </div>
-            </main><br>
+            </main>
+            </center>
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">

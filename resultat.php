@@ -1,3 +1,13 @@
+<?php
+session_start();
+if (isset($_SESSION['e'])) {
+    include("connexion.php");
+
+    $sql = "select * from tabetudiant";
+    $res = mysqli_query($connect, $sql);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +17,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Tableau de bord - Admin</title>
+    <link rel="icon" type="image/png" href="esianotes.jpg">
+    <title>ESIA NOTES</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -56,12 +67,18 @@
 
                         </a>
                         <div class="sb-sidenav-menu-heading"> Etudiants </div>
-                        <a class="nav-link collapsed" href="etudiant.php">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-graduation-cap"></i></div>
                             Etudiants
-                        </a>
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 
-                      
+                        </a>
+                        <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="etudiant.php">Ajout Etudiants</a>
+                                <a class="nav-link" href="gereretu.php">Gérer Etudiants</a>
+                            </nav>
+                        </div>
                         <div class="sb-sidenav-menu-heading">Classes</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
@@ -110,7 +127,7 @@
                                     <span class="login-status online"></span>
                                 </div>
                                 <div class="nav-profile-text d-flex  pr-3">
-                                    <span class="font-weight-medium mb-2"><strong> <em><?php echo $_SESSION['e']?></em></strong></span>
+                                    <span class="font-weight-medium mb-2"><strong><em><?php echo $_SESSION['e']?></em></strong></span>
                                 </div>
                             </a>
                         </li>
