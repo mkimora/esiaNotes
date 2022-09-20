@@ -51,11 +51,7 @@ if (isset($_SESSION['e'])) {
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#!">Paramètres</a></li>
-                    <li><a class="dropdown-item" href="#!">Journal d'activité</a></li>
-                    <li>
-                        <hr class="dropdown-divider" />
-                    </li>
+                    
                     <li><a class="dropdown-item" href="signout.php">Déconnexion
                         </a></li>
                 </ul>
@@ -166,8 +162,8 @@ if (isset($_SESSION['e'])) {
                                         </div>
                                         <label for="inputEmail">Section</label>
                                         <div class="form-floating mb-3">
-                                            <select name="section" id="inputSection">
-                                                <option value="<?php echo $row1['section']?>" disabled="disabled">Sélectionner section</option>
+                                            <select value="<?php echo $row1['section']?>"  name="section" id="inputSection">
+                                                <option disabled="disabled">Sélectionner section</option>
                                                 <option>Génie Informatique</option>
                                                 <option>Comptabilité-Gestion</option>
                                                 <option>Transit-Logistique</option>
@@ -177,8 +173,8 @@ if (isset($_SESSION['e'])) {
                                         </div>
                                         <label for="inputEmail">Niveau</label>
                                         <div class="form-floating mb-3">
-                                            <select name="niveau" id="monselect">
-                                                <option value="<?php echo $row1['niveau']?>" disabled="disabled">Sélectionner niveau</option>
+                                            <select value="<?php echo $row1['niveau']?>" name="niveau" id="monselect">
+                                                <option disabled="disabled">Sélectionner niveau</option>
                                                 <option>BTS</option>
                                                 <option>Licence</option>
                                                 <option>Master</option>
@@ -217,11 +213,7 @@ if (isset($_SESSION['e'])) {
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
                         <div class="text-muted">Copyright &copy; 2021 - 2022 Créée par Mama Guissé Ndiaye</div>
-                        <div>
-                            <a href="#">Politique de confidentialité</a>
-                            &middot;
-                            <a href="#">Termes &amp; Conditions</a>
-                        </div>
+                      
                     </div>
                 </div>
             </footer>

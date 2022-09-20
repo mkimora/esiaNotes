@@ -51,11 +51,7 @@ if (isset($_SESSION['e'])) {
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#!">Paramètres</a></li>
-                    <li><a class="dropdown-item" href="#!">Journal d'activité</a></li>
-                    <li>
-                        <hr class="dropdown-divider" />
-                    </li>
+                   
                     <li><a class="dropdown-item" href="signout.php">Déconnexion
                         </a></li>
                 </ul>
@@ -156,7 +152,7 @@ if (isset($_SESSION['e'])) {
                                 <div class="card-body">
                                     <p><em style="color:red;"></em></p>
                                     <form class="forms-sample" action="manageetudiantEdit2.php" method="post">
-                                        <input type="hidden" value="<?php echo $row1['id']?>" class="form-control" id="section" name="id" id="inputAddress">
+                                    <input type="hidden" value="<?php echo $row1['id']?>" class="form-control" id="section" name="id" id="inputAddress">
                                         
 
                                         <div class="form-floating mb-3">
@@ -188,11 +184,7 @@ if (isset($_SESSION['e'])) {
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
                         <div class="text-muted">Copyright &copy; 2021 - 2022 Créée par Mama Guissé Ndiaye</div>
-                        <div>
-                            <a href="#">Politique de confidentialité</a>
-                            &middot;
-                            <a href="#">Termes &amp; Conditions</a>
-                        </div>
+                    
                     </div>
                 </div>
             </footer>

@@ -44,11 +44,7 @@ if (isset($_SESSION['e'])) {
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#!">Paramètres</a></li>
-                    <li><a class="dropdown-item" href="#!">Journal d'activité</a></li>
-                    <li>
-                        <hr class="dropdown-divider" />
-                    </li>
+
                     <li><a class="dropdown-item" href="signout.php">Déconnexion
                         </a></li>
                 </ul>
@@ -68,7 +64,7 @@ if (isset($_SESSION['e'])) {
                         </a>
                         <div class="sb-sidenav-menu-heading"> Etudiants </div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                        <div class="sb-nav-link-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-graduation-cap"></i></div>
                             Etudiants
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 
@@ -140,19 +136,14 @@ if (isset($_SESSION['e'])) {
             <main>
                 <div class="col-12 grid-margin stretch-card"><br>
                     <center>
-                        <h3 class="card-title"><strong><em style="color:rgb(160 82 45);">Classes</em></strong></h3><br>
+                        <h3 class="card-title"><strong><em style="color:rgb(255 218 185);">Classes</em></strong></h3><br>
                     </center>
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title" style="color:rgb(222 184 135);">Gérer les classes</h4>
                             <p class="card-description"><strong><em>Modifier/Supprimer une classe</em></strong> </p>
 
-                            <form class="nav-link form-inline mt-2 mt-md-0" method="post" action="recherche.php">
-                                <div class="input-group">
-                                    <input name="recherche" type="text" class="form-control" placeholder="Rechercher...">
-                                    <input type="submit" value="Rechercher"  class="btn btn-outline-primary">
-                                </div>
-                            </form>
+            
                             <?php
                             if (isset($_GET['succes'])) {
                                 $err = $_GET['succes'];
@@ -163,42 +154,48 @@ if (isset($_SESSION['e'])) {
                             }
                             ?>
 
-                            <div class="table-responsive">
-                                <table bgcolor="DE B8 87" class="table table">
-                                    <thead>
-                                        <tr bgcolor="FF F8 DC">
-                                            <th scope="col">#</th>
-                                            <th scope="col">Nom de la classe</th>
-                                            <th scope="col">Section</th>
-                                            <th scope="col">Niveau</th>
-                                            <th scope="col">Grade</th>
-                                            <th scope="col">Actions</th>
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-table me-1"></i>
+                                    Liste des classes
+                                </div>
+                                <div class="card-body">
+                                    <table bgcolor="FF DE AD" id="datatablesSimple">
+                                        <thead>
+                                            <tr bgcolor="FF DA B9">
+                                                <th scope="col">#</th>
+                                                <th scope="col">Nom de la classe</th>
+                                                <th scope="col">Section</th>
+                                                <th scope="col">Niveau</th>
+                                                <th scope="col">Grade</th>
+                                                <th scope="col">Actions</th>
 
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        $i = 1;
-                                        while ($row = mysqli_fetch_assoc($res)) {
-                                        ?>
-                                            <tr>
-                                                <th scope="row"><?php echo $i ?></th>
-                                                <td><?php echo $row["className"] ?></td>
-                                                <td><?php echo $row["section"] ?></td>
-                                                <td><?php echo $row["niveau"] ?></td>
-                                                <td><?php echo $row["grade"] ?></td>
-
-                                                <td>
-                                                    <a href="manageclassesedit1.php?id=<?php echo $row['id'] ?>"><i class="fas fa-edit" style="color:yellow"></i></a>
-                                                    <a href="manageclassesSupp.php?id=<?php echo $row['id'] ?>"><i class="fa fa-trash" style="color:red"></i></a>
-                                                </td>
                                             </tr>
-                                        <?php
-                                            $i++;
-                                        }
-                                        ?>
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            $i = 1;
+                                            while ($row = mysqli_fetch_assoc($res)) {
+                                            ?>
+                                                <tr>
+                                                    <th scope="row"><?php echo $i ?></th>
+                                                    <td><?php echo $row["className"] ?></td>
+                                                    <td><?php echo $row["section"] ?></td>
+                                                    <td><?php echo $row["niveau"] ?></td>
+                                                    <td><?php echo $row["grade"] ?></td>
+
+                                                    <td>
+                                                        <a href="manageclassesedit1.php?id=<?php echo $row['id'] ?>"><i class="fas fa-edit" style="color:yellow"></i></a>
+                                                        <a href="manageclassesSupp.php?id=<?php echo $row['id'] ?>"><i class="fa fa-trash" style="color:red"></i></a>
+                                                    </td>
+                                                </tr>
+                                            <?php
+                                                $i++;
+                                            }
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -210,11 +207,7 @@ if (isset($_SESSION['e'])) {
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
                         <div class="text-muted">Copyright &copy; 2021 - 2022 Créée par Mama Guissé Ndiaye</div>
-                        <div>
-                            <a href="#">Politique de confidentialité</a>
-                            &middot;
-                            <a href="#">Termes &amp; Conditions</a>
-                        </div>
+
                     </div>
                 </div>
             </footer>

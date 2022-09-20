@@ -44,11 +44,7 @@ if (isset($_SESSION['e'])) {
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#!">Paramètres</a></li>
-                    <li><a class="dropdown-item" href="#!">Journal d'activité</a></li>
-                    <li>
-                        <hr class="dropdown-divider" />
-                    </li>
+
                     <li><a class="dropdown-item" href="signout.php">Déconnexion
                         </a></li>
                 </ul>
@@ -68,7 +64,7 @@ if (isset($_SESSION['e'])) {
                         </a>
                         <div class="sb-sidenav-menu-heading"> Etudiants </div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                        <div class="sb-nav-link-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-graduation-cap"></i></div>
                             Etudiants
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 
@@ -140,70 +136,76 @@ if (isset($_SESSION['e'])) {
             <main>
                 <div class="col-12 grid-margin stretch-card"><br>
                     <center>
-                        <h3 class="card-title"><strong><em style="color:rgb(160 82 45);">Étudiants</em></strong></h3><br>
+                        <h3 class="card-title"><strong><em style="color:rgb(255 218 185);">Étudiants</em></strong></h3><br>
                     </center>
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title" style="color:rgb(222 184 135);">Gérer les étudiants</h4>
+                            <h4 class="card-title" style="color:rgb(210 180 140);">Gérer les étudiants</h4>
                             <p class="card-description"><strong><em>Modifier/Supprimer un étudiant</em></strong> </p>
 
-                            <form class="nav-link form-inline mt-2 mt-md-0" method="post" action="recherche.php">
-                                <div class="input-group">
-                                    <input name="recherche" type="text" class="form-control" placeholder="Rechercher...">
-                                    <input type="submit" value="Rechercher"  class="btn btn-outline-primary">
-                                </div>
-                            </form>
+                          
                             <?php
                             if (isset($_GET['succes'])) {
                                 $err = $_GET['succes'];
                                 if ($err == 1)
-                                    echo "<div class='alert alert-danger my-3'>Étudiant supprimée avec succès</div>";
+                                    echo "<div class='alert alert-danger my-3'>Étudiant supprimé avec succès</div>";
                                 if ($err == 2)
-                                    echo "<div class='alert alert-success my-3'>Étudiant modifiée avec succès</div>";
+                                    echo "<div class='alert alert-success my-3'>Étudiant modifié avec succès</div>";
                             }
                             ?>
 
-                            <div class="table-responsive">
-                                <table bgcolor="DE B8 87" class="table table">
-                                    <thead>
-                                        <tr bgcolor="FF F8 DC">
-                                            <th scope="col">#</th>
-                                            <th scope="col">Prénom et Nom</th>
-                                            <th scope="col">Email</th>
-                                            <th scope="col">Matricule</th>
-                                            <th scope="col">Sexe</th>
-                                            <th scope="col">Niveau</th>
-                                            <th scope="col">Grade</th>
-                                            <th scope="col">Actions</th>
 
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        $i = 1;
-                                        while ($row = mysqli_fetch_assoc($res)) {
-                                        ?>
-                                            <tr>
-                                                <th scope="row"><?php echo $i ?></th>
-                                                <td><?php echo $row["nomEtudiant"] ?></td>
-                                                <td><?php echo $row["email"] ?></td>
-                                                <td><?php echo $row["matricule"] ?></td>
-                                                <td><?php echo $row["sexe"] ?></td>
-                                                <td><?php echo $row["classe"] ?></td>
-                                                <td><?php echo $row["grade"] ?></td>
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-table me-1"></i>
+                                    Liste des étudiants
+                                </div>
+                                <div class="card-body">
+                                    <table bgcolor="FF DE AD" id="datatablesSimple">
+                                        <thead>
+                                            <tr bgcolor="FF DA B9">
+                                                <th scope="col">#</th>
+                                                <th scope="col">Prénom et Nom</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Matricule</th>
+                                                <th scope="col">Sexe</th>
+                                                <th scope="col">Niveau</th>
+                                                <th scope="col">Grade</th>
+                                                <th scope="col">Actions</th>
 
-                                                <td>
-                                                    <a href="manageetudiantedit1.php?id=<?php echo $row['id'] ?>"><i class="fas fa-edit" style="color:yellow"></i></a>
-                                                    <a href="manageetudiantSupp.php?id=<?php echo $row['id'] ?>"><i class="fa fa-trash" style="color:red"></i></a>
-                                                </td>
                                             </tr>
-                                        <?php
-                                            $i++;
-                                        }
-                                        ?>
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            $i = 1;
+                                            while ($row = mysqli_fetch_assoc($res)) {
+                                            ?>
+                                                <tr>
+                                                    <th scope="row"><?php echo $i ?></th>
+                                                    <td><?php echo $row["nomEtudiant"] ?></td>
+                                                    <td><?php echo $row["email"] ?></td>
+                                                    <td><?php echo $row["matricule"] ?></td>
+                                                    <td><?php echo $row["sexe"] ?></td>
+                                                    <td><?php echo $row["classe"] ?></td>
+                                                    <td><?php echo $row["grade"] ?></td>
+
+                                                    <td>
+                                                        <a href="manageetudiantedit1.php?id=<?php echo $row['id'] ?>"><i class="fas fa-edit" style="color:yellow"></i></a>
+                                                        <a href="manageetudiantSupp.php?id=<?php echo $row['id'] ?>"><i class="fa fa-trash" style="color:red"></i></a>
+                                                    </td>
+                                                </tr>
+                                            <?php
+                                                $i++;
+                                            }
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
+
+
+
+
                         </div>
                     </div>
                 </div>
@@ -214,11 +216,7 @@ if (isset($_SESSION['e'])) {
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
                         <div class="text-muted">Copyright &copy; 2021 - 2022 Créée par Mama Guissé Ndiaye</div>
-                        <div>
-                            <a href="#">Politique de confidentialité</a>
-                            &middot;
-                            <a href="#">Termes &amp; Conditions</a>
-                        </div>
+
                     </div>
                 </div>
             </footer>
@@ -231,6 +229,8 @@ if (isset($_SESSION['e'])) {
     <script src="assets/demo/chart-bar-demo.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
     <script src="js/datatables-simple-demo.js"></script>
+
+
 </body>
 
 </html>
