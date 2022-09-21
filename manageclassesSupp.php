@@ -151,16 +151,12 @@ if (isset($_SESSION['e'])) {
                                 </div>
                                 <div class="card-body">
                                     <p><em style="color:red;"></em></p>
-                                    <form class="forms-sample" action="manageclassesEdit2.php" method="post">
+                                    <form class="forms-sample" action="manageclassesEdit3.php" method="post">
                                         <input type="hidden" value="<?php echo $row1['id']?>" class="form-control" id="section" name="id" id="inputAddress">
                                         
 
-                                        <div class="form-floating mb-3">
-                                            <div class="col-md-6">
-                                                <label for="exampleInputName1" value="<?php echo $row1['className']?>"></label>
-                                            </div>
+                                          
 
-                                        </div>
                                
                                      
                                         <div class="mt-4 mb-0">

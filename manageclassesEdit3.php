@@ -11,8 +11,7 @@ $nn=$_POST['niveau'];
 
 $nnn=$_POST['grade'];
 
-$sql2="update tabclasses set className ='$m',section='$s',niveau='$nn',grade='$nnn' where id='$id'" ;
-$sql= "DELETE FROM tabclasses WHERE id='$id'";
+$sql2= "DELETE FROM tabclasses WHERE id='$id'";
 
 
 

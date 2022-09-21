@@ -151,7 +151,7 @@ if (isset($_SESSION['e'])) {
                                 </div>
                                 <div class="card-body">
                                     <p><em style="color:red;"></em></p>
-                                    <form class="forms-sample" action="manageetudiantEdit2.php" method="post">
+                                    <form class="forms-sample" action="manageetudiantEdit3.php" method="post">
                                     <input type="hidden" value="<?php echo $row1['id']?>" class="form-control" id="section" name="id" id="inputAddress">
                                         
 
