@@ -5,13 +5,11 @@ $id=$_POST['id'];
 
 $m=$_POST['nom'];
 
-$s=$_POST['section'];
+$n=$_POST['section'];
 
-$nn=$_POST['niveau'];
 
-$nnn=$_POST['grade'];
 
-$sql2="update tabclasses set className ='$m',section='$s',niveau='$nn',grade='$nnn' where id='$id'" ;
+$sql2="update tabclasses set className ='$m', section='$n' where id='$id'" ;
 $sql= "DELETE FROM tabclasses WHERE id='$id'";
 
 

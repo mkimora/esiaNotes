@@ -3,7 +3,7 @@ session_start();
 if (isset($_SESSION['e'])) {
     include("connexion.php");
 
-    $sql = "select * from tabetudiant";
+    $sql = "select * from tabnotes";
     $res = mysqli_query($connect, $sql);
 }
 ?>
@@ -33,18 +33,13 @@ if (isset($_SESSION['e'])) {
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
-        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-            <div class="input-group">
-                <input class="form-control" type="text" placeholder="Rechercher..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-            </div>
-        </form>
+    
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                 
+                  
                     <li><a class="dropdown-item" href="signout.php">Déconnexion
                         </a></li>
                 </ul>
@@ -64,7 +59,7 @@ if (isset($_SESSION['e'])) {
                         </a>
                         <div class="sb-sidenav-menu-heading"> Etudiants </div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                        <div class="sb-nav-link-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-graduation-cap"></i></div>
                             Etudiants
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 
@@ -76,71 +71,183 @@ if (isset($_SESSION['e'])) {
                             </nav>
                         </div>
                         <div class="sb-sidenav-menu-heading">Classes</div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Classes
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="ajoutclasse.php">Ajout Classes</a>
-                                    <a class="nav-link" href="gererclasse.php">Gérer Classes</a>
-                                </nav>
-                            </div>
-                         
-                            <div class="sb-sidenav-menu-heading"> Professeurs </div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                Professeurs
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            Classes
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="ajoutclasse.php">Ajout Classes</a>
+                                <a class="nav-link" href="gererclasse.php">Gérer Classes</a>
+                            </nav>
+                        </div>
+
+                        <div class="sb-sidenav-menu-heading"> Professeurs </div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            Professeurs
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                 <a class="nav-link collapsed" href="professeur.php">
-                                        Ajout Professeurs
-                                    </a>
-                                    <a class="nav-link collapsed" href="gererprof.php">
-                                        Gérer Professeurs
-                                    </a>
-                                 
-                    
-                                </nav>
-                            </div>
-                            <div class="sb-sidenav-menu-heading"> Résultats </div>
-                            <a class="nav-link collapsed" href="resultat.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                               Résultats
+                                    Ajout Professeurs
+                                </a>
+                                <a class="nav-link collapsed" href="gererprof.php">
+                                    Gérer Professeurs
+                                </a>
+                            </nav>
+                        </div>
+                       
+                        <div class="sb-sidenav-menu-heading">Résultats</div>
+                            <a class="nav-link" href="resultat.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                Ajouter Note
+                            </a>
+                            <a class="nav-link" href="gereresultat.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Gérer Notes
                             </a>
 
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
-                        <div class="small">Connecté(e) en tant que:
+                    <div class="small">Connecté(e) en tant que:
                         <li class="nav-item nav-profile">
                             <a href="#" class="">
-                                <div class="nav-profile-image" >
-                                    <img src="../image/" width="30" height="25"<?php /* echo $_SESSION['image'] */ ?> alt="profile" />
+                                <div class="nav-profile-image">
+                                    <img src="../image/" width="30" height="25" <?php /* echo $_SESSION['image'] */ ?> alt="profile" />
                                     <span class="login-status online"></span>
                                 </div>
                                 <div class="nav-profile-text d-flex  pr-3">
-                                    <span class="font-weight-medium mb-2"><strong><em><?php echo $_SESSION['e']?></em></strong></span>
+                                    <span class="font-weight-medium mb-2"><strong> <em><?php echo $_SESSION['e'] ?></em></strong></span>
                                 </div>
                             </a>
                         </li>
-                        </div>
                     </div>
+                </div>
             </nav>
         </div>
+
         <div id="layoutSidenav_content">
+<center>
             <main>
 
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-7">
+                            <div class="card shadow-lg border-0 rounded-lg mt-5">
 
+                                <div class="card-header">
+
+                                    <h3 class="text-center font-weight-light my-4">Ajouter une note</h3>
+                                </div>
+                                <div class="card-body">
+                                    <p><em style="color:red;"> * champ obligatoire</em></p>
+                                    <form class="forms-sample" action="resultatX.php" method="post">
+                   
+
+                                    <div class="form-floating mb-3">
+                                            <div class="col-md-6">
+                                                <label for="exampleInputName1">* Prénom(s) et Nom</label>
+                                                <input name="nom" class="form-control" id="exampleInput" type="text" placeholder="" />
+                                            </div>
+
+                                        </div>
+
+                                
+                            
+
+                                        <div class="form-floating mb-3">
+                                            <div class="col-md-6">
+                                                <label for="inputFirstName">* Php :</label>
+                                                <input name="php" class="form-control" id="inputMatricule" type="text" placeholder="Entrer note" required />
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-floating mb-3">
+                                            <div class="col-md-6">
+                                                <label for="inputFirstName">* Java :</label>
+                                                <input name="java" class="form-control" id="inputEmail" type="text" placeholder="Entrer note" required />
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-floating mb-3">
+                                            <div class="col-md-6">
+                                                <label for="inputFirstName">* Comptabilité :</label>
+                                                <input name="compta" class="form-control" id="inputMatricule" type="text" placeholder="Entrer note" required />
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-floating mb-3">
+                                            <div class="col-md-6">
+                                                <label for="inputFirstName">* Oracle :</label>
+                                                <input name="oracle" class="form-control" id="inputMatricule" type="text" placeholder="Entrer note" required />
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-floating mb-3">
+                                            <div class="col-md-6">
+                                                <label for="inputFirstName">* UML :</label>
+                                                <input name="uml" class="form-control" id="inputMatricule" type="text" placeholder="Entrer note" required />
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-floating mb-3">
+                                            <div class="col-md-6">
+                                                <label for="inputFirstName">* Linux :</label>
+                                                <input name="linux" class="form-control" id="inputMatricule" type="text" placeholder="Entrer note" required />
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-floating mb-3">
+                                            <div class="col-md-6">
+                                                <label for="inputFirstName">* Voice IP :</label>
+                                                <input name="voip" class="form-control" id="inputMatricule" type="text" placeholder="Entrer note" required />
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-floating mb-3">
+                                            <div class="col-md-6">
+                                                <label for="inputFirstName">* Windev :</label>
+                                                <input name="windev" class="form-control" id="inputMatricule" type="text" placeholder="Entrer note" required />
+                                            </div>
+
+                                        </div>
+
+                                        
+                                        
+
+                                        <div class="mt-4 mb-0">
+                                            <center>
+                                                <input name="submit" type="submit" value="Ajouter" class="btn btn-outline-info btn-lg mr-2"></a>
+                                                <input type="reset" value="Annuler" class="btn btn-outline-info btn-lg mr-2"></a>
+                                            </center>
+                                        </div>
+
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </main>
+            </center>
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
                         <div class="text-muted">Copyright &copy; 2021 - 2022 Créée par Mama Guissé Ndiaye</div>
-                      
+                    
                     </div>
                 </div>
             </footer>

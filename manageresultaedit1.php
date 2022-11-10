@@ -3,8 +3,15 @@ session_start();
 if (isset($_SESSION['e'])) {
     include("connexion.php");
 
-    $sql = "select * from tabclasses";
+    $id = $_GET['id'];
+
+    $sql = "select * from log_admin";
     $res = mysqli_query($connect, $sql);
+
+    $id = $_GET['id'];
+    $sql1 = "select * from tabetudiant where id='$id'";
+    $res1 = mysqli_query($connect, $sql1);
+    $row1 = mysqli_fetch_assoc($res1);
 }
 ?>
 
@@ -18,7 +25,7 @@ if (isset($_SESSION['e'])) {
     <meta name="description" content="" />
     <meta name="author" content="" />
     <link rel="icon" type="image/png" href="esianotes.jpg">
-    <title>ESIA - NOTES</title>
+    <title>ESIA NOTES</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -33,13 +40,13 @@ if (isset($_SESSION['e'])) {
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
-    
+        
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-
+                    
                     <li><a class="dropdown-item" href="signout.php">Déconnexion
                         </a></li>
                 </ul>
@@ -59,7 +66,7 @@ if (isset($_SESSION['e'])) {
                         </a>
                         <div class="sb-sidenav-menu-heading"> Etudiants </div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-graduation-cap"></i></div>
                             Etudiants
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 
@@ -133,78 +140,120 @@ if (isset($_SESSION['e'])) {
             </nav>
         </div>
         <div id="layoutSidenav_content">
+        <center>
             <main>
-                <div class="col-12 grid-margin stretch-card"><br>
-                    <center>
-                        <h3 class="card-title"><strong><em style="color:rgb(255 218 185);">Gérer les classes</em></strong></h3><br>
-                    
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title" ></h4>
-                            <p class="card-description" style="color:rgb(222 184 135);"><strong><em>Modifier/Supprimer une classe</em></strong> </p>
-
-            
-                            <?php
-                            if (isset($_GET['succes'])) {
-                                $err = $_GET['succes'];
-                                if ($err == 1)
-                                    echo "<div class='alert alert-danger my-3'>Classe supprimée avec succès</div>";
-                                if ($err == 2)
-                                    echo "<div class='alert alert-success my-3'>Classe modifiée avec succès</div>";
-                            }
-                            ?>
-</center>
-                            <div class="card mb-4">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-7">
+                            <div class="card shadow-lg border-0 rounded-lg mt-5">
                                 <div class="card-header">
-                                    <i class="fas fa-table me-1"></i>
-                                    Liste des classes
+                                    <h3 class="text-center font-weight-light my-4">Modifier une note</h3>
                                 </div>
                                 <div class="card-body">
-                                    <table bgcolor="FF DE AD" id="datatablesSimple">
-                                        <thead>
-                                            <tr bgcolor="FF DA B9">
-                                                <th scope="col">#</th>
-                                                <th scope="col">Nom de la classe</th>
-                                                <th scope="col">Section</th>
-                                                <th scope="col">Actions</th>
+                                    <p><em style="color:red;"></em></p>
+                                    <form class="forms-sample" action="manageresultatEdit2.php" method="post">
+                                        <input type="hidden" value="<?php echo $row1['id_notes']?>" class="form-control" id="section" name="id" id="inputAddress">
 
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            $i = 1;
-                                            while ($row = mysqli_fetch_assoc($res)) {
-                                            ?>
-                                                <tr>
-                                                    <th scope="row"><?php echo $i ?></th>
-                                                    <td><?php echo $row["className"] ?></td>
-                                                    <td><?php echo $row["section"] ?></td>
-                                                  
+                                        <div class="form-floating mb-3">
+                                            <div class="col-md-6">
+                                                <label for="exampleInputName1">* Prénom(s) et Nom</label>
+                                                <input name="nom" value="<?php echo $row1['prenomNom']?>" class="form-control" id="exampleInput" type="text" placeholder="" />
+                                            </div>
 
-                                                    <td>
-                                                        <a href="manageclassesedit1.php?id=<?php echo $row['id'] ?>"><i class="fas fa-edit" style="color:yellow"></i></a>
-                                                        <a href="manageclassesSupp.php?id=<?php echo $row['id'] ?>"><i class="fa fa-trash" style="color:red"></i></a>
-                                                    </td>
-                                                </tr>
-                                            <?php
-                                                $i++;
-                                            }
-                                            ?>
-                                        </tbody>
-                                    </table>
+                                        </div>
+
+                            
+
+                                        <div class="form-floating mb-3">
+                                            <div class="col-md-6">
+                                                <label for="inputFirstName">* Php :</label>
+                                                <input name="php" value="<?php echo $row1['php']?>" class="form-control" id="inputMatricule" type="text" placeholder="Entrer note" required />
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-floating mb-3">
+                                            <div class="col-md-6">
+                                                <label for="inputFirstName">* Java :</label>
+                                                <input name="java" value="<?php echo $row1['java']?>" class="form-control" id="inputEmail" type="text" placeholder="Entrer note" required />
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-floating mb-3">
+                                            <div class="col-md-6">
+                                                <label for="inputFirstName">* Comptabilité :</label>
+                                                <input name="compta" value="<?php echo $row1['comptabilite']?>" class="form-control" id="inputMatricule" type="text" placeholder="Entrer note" required />
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-floating mb-3">
+                                            <div class="col-md-6">
+                                                <label for="inputFirstName">* Oracle :</label>
+                                                <input name="oracle" value="<?php echo $row1['oracle']?>" class="form-control" id="inputMatricule" type="text" placeholder="Entrer note" required />
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-floating mb-3">
+                                            <div class="col-md-6">
+                                                <label for="inputFirstName">* UML :</label>
+                                                <input name="uml" value="<?php echo $row1['uml']?>" class="form-control" id="inputMatricule" type="text" placeholder="Entrer note" required />
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-floating mb-3">
+                                            <div class="col-md-6">
+                                                <label for="inputFirstName">* Linux :</label>
+                                                <input name="linux" value="<?php echo $row1['linux']?>" class="form-control" id="inputMatricule" type="text" placeholder="Entrer note" required />
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-floating mb-3">
+                                            <div class="col-md-6">
+                                                <label for="inputFirstName">* Voice IP :</label>
+                                                <input name="voip" value="<?php echo $row1['voip']?>" class="form-control" id="inputMatricule" type="text" placeholder="Entrer note" required />
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-floating mb-3">
+                                            <div class="col-md-6">
+                                                <label for="inputFirstName">* Windev :</label>
+                                                <input name="windev" value="<?php echo $row1['windev']?>" class="form-control" id="inputMatricule" type="text" placeholder="Entrer note" required />
+                                            </div>
+
+                                        </div>
+
+                                                                    
+                                   
+                                     
+                                        <div class="mt-4 mb-0">
+                                            <center>
+                                                <input type="submit"   class="btn btn-outline-info btn-lg mr-2"></a>
+                                                <input type="button" class="btn btn-outline-info btn-lg" value="Annuler" onclick="history.back()">
+
+                                            </center>
+                                        </div>
+
+                                    </form>
                                 </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
 
-
             </main>
+            </center>
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
                         <div class="text-muted">Copyright &copy; 2021 - 2022 Créée par Mama Guissé Ndiaye</div>
-
+                      
                     </div>
                 </div>
             </footer>

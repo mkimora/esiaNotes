@@ -111,17 +111,20 @@ if(isset($_SESSION['e']))
                                     <a class="nav-link collapsed" href="gererprof.php">
                                         Gérer Professeurs
                                     </a>
-                                 
-                    
                                 </nav>
                             </div>
-                       
+                            
                             <div class="sb-sidenav-menu-heading">Résultats</div>
-                            <a class="nav-link collapsed" href="resultat.php">
-                                <div class="sb-nav-link-icon"><i class="fa-solid fa-square-poll-horizontal"></i></div>
-                               Résultats
+                            <a class="nav-link" href="resultat.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                Ajouter Note
                             </a>
-                           
+                            <a class="nav-link" href="gereresultat.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Gérer Notes
+                            </a>
+                        
+
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
@@ -129,8 +132,8 @@ if(isset($_SESSION['e']))
                         <li class="nav-item nav-profile">
                             <a href="#" class="">
                                 <div class="nav-profile-image" >
-                                    <img src="" width="30" height="25"<?php /* echo $_SESSION['image'] */ ?> alt="profile" />
-                                    <span class="login-status online"></span>
+                                    <img src="" width="30" height="25"<?php /* echo $_SESSION['image'] */ ?> alt="" />
+                                    <span class="login-status online" ></span>
                                 </div>
                                 <div class="nav-profile-text d-flex  pr-3">
                                     <span class="font-weight-medium mb-2"><strong> <em><?php echo $_SESSION['e']?></em></strong></span>
@@ -147,8 +150,8 @@ if(isset($_SESSION['e']))
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Tableau de bord</h1>
                         <ol class="breadcrumb mb-4">
-                            <em><b>Bonjour, bienvenue:  </b></em>
-                            <li class="breadcrumb-item active" style="color:RosyBrown;"><em><strong><?php echo $_SESSION['e']?></strong></em>  </li>  !
+                            <em><b>Bonjour, bienvenue :  </b></em>
+                            <li class="breadcrumb-item active" style="color:RosyBrown;"><em><strong><?php echo $_SESSION['e']?></strong></em> <br> </li> ! 
                         </ol>
                 
                         <div class=""></div>
@@ -186,7 +189,7 @@ if(isset($_SESSION['e']))
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-success text-white mb-4">
                                 <?php
-                                    $query = "select id from tabresultat order by id";
+                                    $query = "select id_notes from tabnotes order by id_notes";
                                     $query_run=mysqli_query($connect,$query);
                                     $row=mysqli_num_rows($query_run);
                                     ?>
@@ -208,7 +211,7 @@ if(isset($_SESSION['e']))
                                     <div class="card-body">Professeurs</div>
                                     <h2 class="text-white"><?php echo $row?></h2>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="professeur.php">Voir Détails</a>
+                                        <a class="small text-white stretched-link" href="gererprof.php">Voir Détails</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>

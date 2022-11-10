@@ -33,12 +33,7 @@ if (isset($_SESSION['e'])) {
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
-        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-            <div class="input-group">
-                <input class="form-control" type="text" placeholder="Rechercher..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-            </div>
-        </form>
+    
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
             <li class="nav-item dropdown">
@@ -104,11 +99,16 @@ if (isset($_SESSION['e'])) {
                                 </a>
                             </nav>
                         </div>
-                        <div class="sb-sidenav-menu-heading"> Résultats </div>
-                        <a class="nav-link collapsed" href="resultat.php">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Résultats
-                        </a>
+                       
+                        <div class="sb-sidenav-menu-heading">Résultats</div>
+                            <a class="nav-link" href="resultat.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                Ajouter Note
+                            </a>
+                            <a class="nav-link" href="gereresultat.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Gérer Notes
+                            </a>
 
                     </div>
                 </div>
@@ -131,7 +131,7 @@ if (isset($_SESSION['e'])) {
         </div>
 
         <div id="layoutSidenav_content">
-
+<center>
             <main>
 
                 <div class="container">
@@ -150,7 +150,7 @@ if (isset($_SESSION['e'])) {
                                         if (isset($_GET['succes'])) {
                                             $err = $_GET['succes'];
                                             if ($err == 1 || $err == 2)
-                                                echo "<div class='alert alert-success my-3'>Étudiant ajouté avec succès</div>";
+                                                echo "<div class='alert alert-success my-3'>Étudiant ajouté(e) avec succès.</div>";
                                         }
                                         ?>
 
@@ -158,7 +158,7 @@ if (isset($_SESSION['e'])) {
                                         if (isset($_GET['erreur'])) {
                                             $err = $_GET['erreur'];
                                             if ($err == 1)
-                                                echo "<div class='alert alert-danger my-3'>Cet étudiant existe déjà</div>";
+                                                echo "<div class='alert alert-danger my-3'>Cet étudiant existe déjà.</div>";
                                             if ($err == 2)
                                                 echo "<div class='alert alert-danger my-3'>Champ vide!!</div>";
                                         }
@@ -168,6 +168,22 @@ if (isset($_SESSION['e'])) {
                                             <div class="col-md-6">
                                                 <label for="inputFirstName">* Prénom et Nom</label>
                                                 <input name="nom" class="form-control" id="inputFirstName" type="text" placeholder="Entrer prénom et nom" required />
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-floating mb-3">
+                                            <div class="col-md-6">
+                                                <label for="inputFirstName">* Date de naissance</label>
+                                                <input name="date" class="form-control" id="inputMatricule" type="date" placeholder="Entrer date de naissance" required />
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-floating mb-3">
+                                            <div class="col-md-6">
+                                                <label for="inputFirstName">* Lieu de naissance</label>
+                                                <input name="lieunaiss" class="form-control" id="inputMatricule" type="text" placeholder="Entrer lieu de naissance" required />
                                             </div>
 
                                         </div>
@@ -191,21 +207,36 @@ if (isset($_SESSION['e'])) {
                                         <div class="form-floating mb-3">
                                             <select name="genre" id="inputSection">
                                                 <option selected disabled="disabled">Sélectionner genre</option>
-                                                <option>Masculin</option>
-                                                <option>Féminin</option>
+                                                <option>M</option>
+                                                <option>F</option>
                                             </select>
                                         </div>
+
+                        
+                                        <label for="inputEmail">* Classe</label>
+                                        <div class="form-floating mb-3">
+                                            <select name="classe" id="monselect">
+                                                <option selected disabled="disabled">Sélectionner une classe</option>
+                                                <option>Informatique de Gestion</option>
+                                                <option>Informatique Décisionnelle</option>
+                                                <option>Commerce International</option>
+                                                <option>Génie Informatique</option>
+                                                <option>Transport - Logistique</option>
+                                                <option>Comptabilité</option>
+                                            </select>
+                                        </div>
+                                        
                                         <label for="inputEmail">* Section</label>
                                         <div class="form-floating mb-3">
                                             <select name="niveau" id="monselect">
-                                                <option selected disabled="disabled">Sélectionner classe</option>
-                                                <option>Génie Informatique</option>
+                                                <option selected disabled="disabled">Sélectionner section</option>
+                                                <option>Informatique</option>
                                                 <option>Comptabilité-Gestion</option>
-                                                <option>Transit-Logistique</option>
-                                                <option>Génie Electrique</option>
-                                                <option>Génie Civile</option>
+                                                <option>Transport-Logistique</option>
+                                                <option>Commerce International</option>
                                             </select>
                                         </div>
+                                   
                                         <label for="inputEmail">* Grade</label>
                                         <div class="form-floating mb-3">
                                             <select name="grade" id="monselect" required>
@@ -220,8 +251,8 @@ if (isset($_SESSION['e'])) {
 
                                         <div class="mt-4 mb-0">
                                             <center>
-                                                <input type="submit" value="Ajouter" class="btn btn-primary mr-2"></a>
-                                                <input type="reset" value="Annuler" class="btn btn-primary mr-2"></a>
+                                                <input type="submit" value="Ajouter" class="btn btn-outline-info btn-lg mr-2"></a>
+                                                <input type="reset" value="Annuler" class="btn btn-outline-info btn-lg mr-2"></a>
                                             </center>
                                         </div>
 
@@ -234,6 +265,7 @@ if (isset($_SESSION['e'])) {
 
                 </div>
             </main>
+            </center>
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">

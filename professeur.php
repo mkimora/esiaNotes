@@ -31,12 +31,7 @@ if (isset($_SESSION['e'])) {
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
-            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Rechercher..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-                </div>
-            </form>
+      
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
@@ -104,10 +99,15 @@ if (isset($_SESSION['e'])) {
                     
                                 </nav>
                             </div>
-                            <div class="sb-sidenav-menu-heading"> Résultats </div>
-                            <a class="nav-link collapsed" href="resultat.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                               Résultats
+                           
+                            <div class="sb-sidenav-menu-heading">Résultats</div>
+                            <a class="nav-link" href="resultat.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                Ajouter Note
+                            </a>
+                            <a class="nav-link" href="gereresultat.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Gérer Notes
                             </a>
                      
                         </div>
@@ -131,9 +131,115 @@ if (isset($_SESSION['e'])) {
             </div>
             <div id="layoutSidenav_content">
                 <main>
+<center>
+ <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-7">
+                            <div class="card shadow-lg border-0 rounded-lg mt-5">
 
+                                <div class="card-header">
+
+                                    <h3 class="text-center font-weight-light my-4">Ajouter un professeur</h3>
+                                </div>
+                                <div class="card-body">
+                                    <p><em style="color:red;"> * champ obligatoire</em></p>
+                                    <form class="forms-sample" action="addprof.php" method="post">
+                                        <?php
+                                        if (isset($_GET['succes'])) {
+                                            $err = $_GET['succes'];
+                                            if ($err == 1 || $err == 2)
+                                                echo "<div class='alert alert-success my-3'>Professeur ajouté(e) avec succès.</div>";
+                                        }
+                                        ?>
+
+                                        <?php
+                                        if (isset($_GET['erreur'])) {
+                                            $err = $_GET['erreur'];
+                                            if ($err == 1)
+                                                echo "<div class='alert alert-danger my-3'>Ce professeur existe déjà.</div>";
+                                            if ($err == 2)
+                                                echo "<div class='alert alert-danger my-3'>Champ vide!!</div>";
+                                        }
+                                        ?>
+
+                                        <div class="form-floating mb-3">
+                                            <div class="col-md-6">
+                                                <label for="inputFirstName">* Nom</label>
+                                                <input name="nom" class="form-control" id="inputFirstName" type="text" placeholder="Entrer nom" required />
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-floating mb-3">
+                                            <div class="col-md-6">
+                                                <label for="inputFirstName">* Prénom </label>
+                                                <input name="prenom" class="form-control" id="inputMatricule" type="text" placeholder="Entrer prénom" required />
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="form-floating mb-3">
+                                            <div class="col-md-6">
+                                                <label for="inputFirstName">* Téléphone</label>
+                                                <input name="tel" class="form-control" id="inputEmail" type="text" placeholder="Entrer téléphone" required />
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-floating mb-3">
+                                            <div class="col-md-6">
+                                                <label for="inputFirstName">* Adresse</label>
+                                                <input name="adresse" class="form-control" id="inputMatricule" type="text" placeholder="Entrer adresse" required />
+                                            </div>
+
+                                        </div>
+                                        <label for="inputEmail">* Genre</label>
+                                        <div class="form-floating mb-3">
+                                            <select name="genre" id="inputSection">
+                                                <option selected disabled="disabled">Sélectionner genre</option>
+                                                <option>M</option>
+                                                <option>F</option>
+                                            </select>
+                                        </div>
+
+
+                                        
+                                        <label for="inputEmail">* Matiere</label>
+                                        <div class="form-floating mb-3">
+                                            <select name="mat" id="monselect">
+                                                <option selected disabled="disabled">Sélectionner matiere</option>
+                                                <option>Php</option>
+                                                <option>Java</option>
+                                                <option>Comptabilite</option>
+                                                <option>Oracle</option>
+                                                <option>UML</option>
+                                                <option>Linux</option>
+                                                <option>Voice IP</option>
+                                                <option>Windev</option>
+                                            </select>
+                                        </div>
+                                   
+                                      
+
+                                        <div class="mt-4 mb-0">
+                                            <center>
+                                                <input type="submit" value="Ajouter" class="btn btn-outline-info btn-lg mr-2"></a>
+                                                <input type="reset" value="Annuler" class="btn btn-outline-info btn-lg mr-2"></a>
+                                            </center>
+                                        </div>
+
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
                 
                 </main>
+                </center>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">

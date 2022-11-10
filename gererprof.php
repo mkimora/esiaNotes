@@ -31,12 +31,7 @@ if (isset($_SESSION['e'])) {
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
-            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Rechercher..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-                </div>
-            </form>
+       
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
@@ -104,10 +99,15 @@ if (isset($_SESSION['e'])) {
                     
                                 </nav>
                             </div>
-                            <div class="sb-sidenav-menu-heading"> Résultats </div>
-                            <a class="nav-link collapsed" href="resultat.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                               Résultats
+                           
+                            <div class="sb-sidenav-menu-heading">Résultats</div>
+                            <a class="nav-link" href="resultat.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                Ajouter Note
+                            </a>
+                            <a class="nav-link" href="gereresultat.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Gérer Notes
                             </a>
                      
                         </div>
@@ -131,6 +131,84 @@ if (isset($_SESSION['e'])) {
             </div>
             <div id="layoutSidenav_content">
                 <main>
+                <div class="col-12 grid-margin stretch-card"><br>
+                    <center>
+                        <h3 class="card-title"><strong><em style="color:rgb(255 218 185);">Gérer les professeurs</em></strong></h3><br>
+                   
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title"></h4>
+                            <p class="card-description" style="color:rgb(210 180 140);"><strong><em>Modifier/Supprimer un professeur</em></strong> </p>
+
+                          
+                            <?php
+                            if (isset($_GET['succes'])) {
+                                $err = $_GET['succes'];
+                                if ($err == 1)
+                                    echo "<div class='alert alert-danger my-3'>Professeur supprimé(e) avec succès.</div>";
+                                if ($err == 2)
+                                    echo "<div class='alert alert-success my-3'>Professeur modifié(e) avec succès.</div>";
+                            }
+                            ?>
+ </center>
+
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-table me-1"></i>
+                                    Liste des professeurs
+                                </div>
+                                <div class="card-body">
+                                    <table bgcolor="FF DE AD" id="datatablesSimple">
+                                        <thead>
+                                            <tr bgcolor="FF DA B9">
+                                                <th scope="col">#</th>
+                                                <th scope="col">Prénom(s)</th>
+                                                <th scope="col">Nom</th>
+                                                <th scope="col">Téléphone</th>
+                                                <th scope="col">Adresse</th>
+                                                <th scope="col">Genre</th>
+                                                <th scope="col">Matiere</th>
+                                                <th scope="col">Actions</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            $i = 1;
+                                            while ($row = mysqli_fetch_assoc($res)) {
+                                            ?>
+                                                <tr>
+                                                    <th scope="row"><?php echo $i ?></th>
+                                                    <td><?php echo $row["prenomprof"] ?></td>
+                                                    <td><?php echo $row["nomprof"] ?></td>
+                                                    <td><?php echo $row["telprof"] ?></td>
+                                                    <td><?php echo $row["adresseprof"] ?></td>
+                                                    <td><?php echo $row["genreprof"] ?></td>
+                                                    <td><?php echo $row["matiereprof"] ?></td>
+                                                    
+
+                                                    <td>
+                                                        <a href="manageprofedit1.php?id=<?php echo $row['id'] ?>"><i class="fas fa-edit" style="color:yellow"></i></a>
+                                                        <a href="manageprofSupp.php?id=<?php echo $row['id'] ?>"><i class="fa fa-trash" style="color:red"></i></a>
+                                                    </td>
+                                                </tr>
+                                            <?php
+                                                $i++;
+                                            }
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+
 
                 
                 </main>

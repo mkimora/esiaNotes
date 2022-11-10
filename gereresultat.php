@@ -3,7 +3,7 @@ session_start();
 if (isset($_SESSION['e'])) {
     include("connexion.php");
 
-    $sql = "select * from tabclasses";
+    $sql = "select * from tabnotes";
     $res = mysqli_query($connect, $sql);
 }
 ?>
@@ -33,7 +33,7 @@ if (isset($_SESSION['e'])) {
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
-    
+     
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
             <li class="nav-item dropdown">
@@ -102,7 +102,7 @@ if (isset($_SESSION['e'])) {
 
                             </nav>
                         </div>
-                      
+                       
                         <div class="sb-sidenav-menu-heading">Résultats</div>
                             <a class="nav-link" href="resultat.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
@@ -136,36 +136,47 @@ if (isset($_SESSION['e'])) {
             <main>
                 <div class="col-12 grid-margin stretch-card"><br>
                     <center>
-                        <h3 class="card-title"><strong><em style="color:rgb(255 218 185);">Gérer les classes</em></strong></h3><br>
-                    
+                        <h3 class="card-title"><strong><em style="color:rgb(255 218 185);">Gérer les notes</em></strong></h3><br>
+                   
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title" ></h4>
-                            <p class="card-description" style="color:rgb(222 184 135);"><strong><em>Modifier/Supprimer une classe</em></strong> </p>
+                            <p class="card-description" style="color:rgb(210 180 140);"><strong><em>Modifier/Supprimer une note</em></strong> </p>
 
-            
+                          
                             <?php
                             if (isset($_GET['succes'])) {
                                 $err = $_GET['succes'];
                                 if ($err == 1)
-                                    echo "<div class='alert alert-danger my-3'>Classe supprimée avec succès</div>";
+                                    echo "<div class='alert alert-danger my-3'>Note supprimée avec succès.</div>";
                                 if ($err == 2)
-                                    echo "<div class='alert alert-success my-3'>Classe modifiée avec succès</div>";
+                                    echo "<div class='alert alert-success my-3'>Note modifiée avec succès.</div>";
                             }
                             ?>
 </center>
+
                             <div class="card mb-4">
                                 <div class="card-header">
                                     <i class="fas fa-table me-1"></i>
-                                    Liste des classes
+                                    Liste des notes des étudiants
                                 </div>
                                 <div class="card-body">
                                     <table bgcolor="FF DE AD" id="datatablesSimple">
                                         <thead>
                                             <tr bgcolor="FF DA B9">
                                                 <th scope="col">#</th>
-                                                <th scope="col">Nom de la classe</th>
-                                                <th scope="col">Section</th>
+                                                <th scope="col">Prénom(s) et Nom</th>
+                                                <th scope="col">Classe</th>
+                                                <th scope="col">Php</th>
+                                                <th scope="col">Java</th>
+                                                <th scope="col">UML</th>
+                                                <th scope="col">Windev</th>
+                                                <th scope="col">Comptabilité</th>
+                                                <th scope="col">Linux</th>
+                                                <th scope="col">Voice IP</th>
+                                                <th scope="col">Oracle</th>
+                                                <th scope="col">Moyenne</th>
+                                
                                                 <th scope="col">Actions</th>
 
                                             </tr>
@@ -177,13 +188,22 @@ if (isset($_SESSION['e'])) {
                                             ?>
                                                 <tr>
                                                     <th scope="row"><?php echo $i ?></th>
-                                                    <td><?php echo $row["className"] ?></td>
-                                                    <td><?php echo $row["section"] ?></td>
-                                                  
+                                                    <td><?php echo $row["prenomNom"] ?></td>
+                                                    <td><?php echo $row["classe"] ?></td>
+                                                    <td><?php echo $row["php"] ?></td>
+                                                    <td><?php echo $row["java"] ?></td>
+                                                    <td><?php echo $row["uml"] ?></td>
+                                                    <td><?php echo $row["windev"] ?></td>
+                                                    <td><?php echo $row["comptabilite"] ?></td>
+                                                    <td><?php echo $row["linux"] ?></td>
+                                                    <td><?php echo $row["voiceip"] ?></td>
+                                                    <td><?php echo $row["oracle"] ?></td>
+                                                    <td><?php echo $row["moyenne"] ?></td>
+                                                 
 
                                                     <td>
-                                                        <a href="manageclassesedit1.php?id=<?php echo $row['id'] ?>"><i class="fas fa-edit" style="color:yellow"></i></a>
-                                                        <a href="manageclassesSupp.php?id=<?php echo $row['id'] ?>"><i class="fa fa-trash" style="color:red"></i></a>
+                                                        <a href="manageresultaedit1.php?id=<?php echo $row['id_notes'] ?>"><i class="fas fa-edit" style="color:yellow"></i></a>
+                                                        <a href="manageresultatSupp.php?id=<?php echo $row['id_notes'] ?>"><i class="fa fa-download" style="color:red"></i></a>
                                                     </td>
                                                 </tr>
                                             <?php
@@ -194,6 +214,10 @@ if (isset($_SESSION['e'])) {
                                     </table>
                                 </div>
                             </div>
+
+
+
+
                         </div>
                     </div>
                 </div>
@@ -217,6 +241,8 @@ if (isset($_SESSION['e'])) {
     <script src="assets/demo/chart-bar-demo.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
     <script src="js/datatables-simple-demo.js"></script>
+
+
 </body>
 
 </html>

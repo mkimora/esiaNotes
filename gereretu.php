@@ -33,12 +33,7 @@ if (isset($_SESSION['e'])) {
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
-        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-            <div class="input-group">
-                <input class="form-control" type="text" placeholder="Rechercher..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-            </div>
-        </form>
+     
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
             <li class="nav-item dropdown">
@@ -107,11 +102,16 @@ if (isset($_SESSION['e'])) {
 
                             </nav>
                         </div>
-                        <div class="sb-sidenav-menu-heading"> Résultats </div>
-                        <a class="nav-link collapsed" href="resultat.php">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Résultats
-                        </a>
+                       
+                        <div class="sb-sidenav-menu-heading">Résultats</div>
+                            <a class="nav-link" href="resultat.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                Ajouter Note
+                            </a>
+                            <a class="nav-link" href="gereresultat.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Gérer Notes
+                            </a>
 
                     </div>
                 </div>
@@ -136,24 +136,24 @@ if (isset($_SESSION['e'])) {
             <main>
                 <div class="col-12 grid-margin stretch-card"><br>
                     <center>
-                        <h3 class="card-title"><strong><em style="color:rgb(255 218 185);">Étudiants</em></strong></h3><br>
-                    </center>
+                        <h3 class="card-title"><strong><em style="color:rgb(255 218 185);">Gérer les étudiants</em></strong></h3><br>
+                   
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title" style="color:rgb(210 180 140);">Gérer les étudiants</h4>
-                            <p class="card-description"><strong><em>Modifier/Supprimer un étudiant</em></strong> </p>
+                            <h4 class="card-title" ></h4>
+                            <p class="card-description" style="color:rgb(210 180 140);"><strong><em>Modifier/Supprimer un étudiant</em></strong> </p>
 
                           
                             <?php
                             if (isset($_GET['succes'])) {
                                 $err = $_GET['succes'];
                                 if ($err == 1)
-                                    echo "<div class='alert alert-danger my-3'>Étudiant supprimé avec succès</div>";
+                                    echo "<div class='alert alert-danger my-3'>Étudiant supprimé(e) avec succès.</div>";
                                 if ($err == 2)
-                                    echo "<div class='alert alert-success my-3'>Étudiant modifié avec succès</div>";
+                                    echo "<div class='alert alert-success my-3'>Étudiant modifié(e) avec succès.</div>";
                             }
                             ?>
-
+</center>
 
                             <div class="card mb-4">
                                 <div class="card-header">
@@ -165,12 +165,15 @@ if (isset($_SESSION['e'])) {
                                         <thead>
                                             <tr bgcolor="FF DA B9">
                                                 <th scope="col">#</th>
-                                                <th scope="col">Prénom et Nom</th>
+                                                <th scope="col">Prénom(s) et Nom</th>
+                                                <th scope="col">Date de naissance</th>
+                                                <th scope="col">Lieu de naissance</th>
                                                 <th scope="col">Email</th>
                                                 <th scope="col">Matricule</th>
                                                 <th scope="col">Sexe</th>
-                                                <th scope="col">Niveau</th>
+                                                <th scope="col">Section</th>
                                                 <th scope="col">Grade</th>
+                                                <th scope="col">Classe</th>
                                                 <th scope="col">Actions</th>
 
                                             </tr>
@@ -183,15 +186,20 @@ if (isset($_SESSION['e'])) {
                                                 <tr>
                                                     <th scope="row"><?php echo $i ?></th>
                                                     <td><?php echo $row["nomEtudiant"] ?></td>
+                                                    <td><?php echo $row["date_naissance"] ?></td>
+                                                    <td><?php echo $row["lieu_naissance"] ?></td>
                                                     <td><?php echo $row["email"] ?></td>
                                                     <td><?php echo $row["matricule"] ?></td>
                                                     <td><?php echo $row["sexe"] ?></td>
-                                                    <td><?php echo $row["classe"] ?></td>
+                                                    <td><?php echo $row["section"] ?></td>
                                                     <td><?php echo $row["grade"] ?></td>
+                                                    <td><?php echo $row["classe"] ?></td>
 
                                                     <td>
                                                         <a href="manageetudiantedit1.php?id=<?php echo $row['id'] ?>"><i class="fas fa-edit" style="color:yellow"></i></a>
                                                         <a href="manageetudiantSupp.php?id=<?php echo $row['id'] ?>"><i class="fa fa-trash" style="color:red"></i></a>
+                                                        <a href="manageresultaedit1.php?id=<?php echo $row['id'] ?>"><i class="fas fa-eye" style="color:blue"></i></a>
+
                                                     </td>
                                                 </tr>
                                             <?php
